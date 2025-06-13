@@ -1,130 +1,161 @@
+/* Reset e layout base */
 html, body {
-    height: 100%;
-}
-body {
+    margin: 0;
+    padding: 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-}
-.container {
-    flex: 1 0 auto;
-    max-width: 800px;
-    margin: 40px auto;
-    background: #fff; /* Fundo branco */
-    border-radius: 12px;
-    box-shadow: 0 4px 24px #0002; /* Sombra suave */
-    padding: 36px 28px 28px 28px;
-    position: relative;
-}
-body {
-    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
-    background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
-    margin: 0;
-    padding: 0;
-}
-h2, h1 {
-    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f4f4f4;
     color: #333;
-    margin-bottom: 24px;
 }
-.form-box {
+
+/* Conteúdo principal flexível */
+.conteudo {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 30px;
+    padding: 30px;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
 }
-input[type="text"], input[type="email"], input[type="password"], textarea, input[type="file"] {
-    padding: 10px;
-    border: 1px solid #bbb;
-    border-radius: 6px;
-    font-size: 1em;
-    background: #f8f8f8;
+.topo {
+    background: #2c3e50;
+    color: white;
+    padding: 0px;
+    text-align: left; /* Alinha conteúdo à esquerda */
+    border-bottom: 4px solid #1a252f;
+    display: flex;
+    align-items: center;
+    gap: 18px;
 }
-textarea {
-    min-height: 90px;
-    resize: vertical;
-}
-button, .btn-voltar {
-    background: linear-gradient(90deg, #ff9966 0%, #ff5e62 100%);
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    padding: 12px 0;
-    font-size: 1em;
+.topo h1 {
+    margin: 0;
+    font-size: 2.2em;
     font-weight: bold;
-    cursor: pointer;
-    margin-top: 8px;
-    transition: background 0.2s, box-shadow 0.2s;
-    box-shadow: 0 2px 8px #ff996633;
-    text-align: center;
-    display: block;
-    text-decoration: none;
+    display: inline-block;
+    vertical-align: middle;
 }
-button:hover, .btn-voltar:hover {
-    background: linear-gradient(90deg, #ff5e62 0%, #ff9966 100%);
-    box-shadow: 0 4px 16px #ff996655;
+.logo {
+    height: 56px;
+    margin-right: 12px;
+    vertical-align: middle;
 }
-.btn-voltar {
-    width: 120px;
-    margin: 0 auto 18px auto;
-}
-.msg-erro {
-    color: #c00;
-    text-align: center;
+.menu-superior {
     margin-top: 10px;
 }
-.sexo-box {
-    margin: 8px 0;
-    font-size: 0.97em;
-}
-a {
-    color: #ff5e62;
+.menu-superior a,
+.menu-superior span {
+    margin: 0 8px;
+    color: #ecf0f1;
+    font-weight: bold;
     text-decoration: none;
 }
-a:hover {
+.menu-superior a:hover {
     text-decoration: underline;
 }
-table {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px #0001;
-    margin-top: 24px;
-    width: 100%;
-    border-collapse: collapse;
+
+/* Filtros */
+.filtros-categorias {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+    flex-wrap: wrap;
 }
-th, td {
-    padding: 10px 8px;
-    border-bottom: 1px solid #eee;
-    text-align: left;
-}
-th {
-    background: #fda085;
-    color: #fff;
-    font-weight: bold;
-}
-tr:last-child td {
-    border-bottom: none;
-}
-img {
-    border-radius: 6px;
-}
-footer {
-    flex-shrink: 0;
-    margin-top: 40px;
-    text-align: center;
-}
-.btn-filtro {
-    background: linear-gradient(90deg, #fda085 0%, #f6d365 100%);
-    color: #fff;
+.filtros-categorias button {
+    background: #7f8c8d;
     border: none;
-    border-radius: 20px;
-    padding: 10px 28px;
-    font-size: 1em;
+    padding: 10px 20px;
+    border-radius: 50px;
+    color: white;
     font-weight: bold;
     cursor: pointer;
-    transition: background 0.2s, box-shadow 0.2s;
-    box-shadow: 0 2px 8px #fda08533;
+    box-shadow: 0 2px 8px #0001;
+    transition: background 0.3s ease;
 }
-.btn-filtro:hover {
-    background: linear-gradient(90deg, #f6d365 0%, #fda085 100%);
-    box-shadow: 0 4px 16px #fda08555;
+.filtros-categorias button:hover {
+    background: #95a5a6;
+}
+
+/* Cartão de notícia */
+.card-noticia {
+    display: flex;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px #00000011;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+.card-noticia:hover {
+    transform: scale(1.01);
+}
+.card-noticia img {
+    width: 180px;
+    height: auto;
+    object-fit: cover;
+}
+.card-noticia .texto {
+    padding: 20px;
+    flex: 1;
+}
+.card-noticia h2 {
+    margin: 0 0 10px;
+    color: #2c3e50;
+}
+.card-noticia p {
+    margin: 0 0 12px;
+}
+.card-noticia small {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    color: #777;
+}
+
+/* Botão Ler mais */
+.ler-mais {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #34495e;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+.ler-mais:hover {
+    background: #2c3e50;
+}
+
+.sem-noticia {
+    text-align: center;
+    font-size: 1.2em;
+    color: #777;
+}
+
+footer {
+    margin-top: auto;
+    background: #2c3e50;
+    color: #eee;
+    text-align: center;
+    padding: 30px 10px;
+}
+footer .redes {
+    margin-bottom: 12px;
+}
+footer .redes img {
+    width: 24px;
+    margin: 0 6px;
+    vertical-align: middle;
+    filter: brightness(0) invert(1);
+}
+
+.logo {
+    height: 250px;
+    margin-right: 12px;
+    vertical-align: middle;
+    height: 12vw;
 }

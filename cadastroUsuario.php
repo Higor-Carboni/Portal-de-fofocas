@@ -25,8 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $pdo->prepare("INSERT INTO usuarios (nome, email, senha, perfil) VALUES (?, ?, ?, 'normal')");
             $stmt->execute([$nome, $email, $senhaHash]);
 
-            $usuario_id = $pdo->lastInsertId();
-            $_SESSION['usuario_id'] = $usuario_id;
+            $_SESSION['usuario_id'] = $pdo->lastInsertId();
             $_SESSION['usuario_nome'] = $nome;
             $_SESSION['usuario_perfil'] = 'normal';
 
@@ -41,77 +40,70 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Criar Conta</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        body {
-            background: #f4f4f4;
+        * {
+            box-sizing: border-box;
+        }
+        html, body {
             margin: 0;
+            padding: 0;
+            background: #f0f4ff;
             font-family: 'Segoe UI', sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
-        .topo {
-            background: #2c3e50;
+        header.topo {
+            background: #3A5EFF;
             color: white;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 4px solid #1a252f;
+            padding: 20px 30px; /* Aumentado */
+            border-bottom: 4px solid #1A237E;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 120px; /* Adicionado */
         }
-        .topo h1 {
-            margin: 0;
-            font-size: 2.2em;
-            font-weight: bold;
+       .logo {
+            height: 100px;
+            animation: girarLogo 20s linear infinite;
+            transform-origin: center;
         }
-        .menu-superior {
-            margin-top: 10px;
-        }
-        .menu-superior a {
-            margin: 0 8px;
-            color: #ecf0f1;
-            font-weight: bold;
-            text-decoration: none;
-        }
-        .menu-superior a:hover {
-            text-decoration: underline;
+        @keyframes girarLogo {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         .container {
-            max-width: 400px;
-            margin: 40px auto 0 auto;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px #0001;
-            padding: 32px 28px 24px 28px;
-        }
-        .container h2 {
-            text-align: center;
-            color: #2c3e50;
-            margin-bottom: 18px;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .form-box {
+            background: white;
+            padding: 32px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px #0001;
             display: flex;
             flex-direction: column;
             gap: 18px;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px #0001;
-            padding: 32px 28px 24px 28px;
-            margin: 30px auto 0 auto;
-            max-width: 370px;
+            width: 100%;
+            max-width: 400px;
         }
-        .form-box input[type="text"],
-        .form-box input[type="email"],
-        .form-box input[type="password"] {
+        .form-box input {
             padding: 12px;
             border: 1.5px solid #bfc9d1;
             border-radius: 8px;
             font-size: 1em;
             background: #f8fafc;
-            transition: border 0.2s;
         }
         .form-box input:focus {
-            border-color: #34495e;
+            border-color: #3A5EFF;
             outline: none;
             background: #fff;
         }
         .form-box button {
-            background: #34495e;
+            background: #3A5EFF;
             color: #fff;
             border: none;
             padding: 12px;
@@ -119,45 +111,73 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-size: 1.1em;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.2s;
         }
         .form-box button:hover {
-            background: #2c3e50;
+            background: #1A237E;
+        }
+        .form-box a {
+            text-align: center;
+            color: #3A5EFF;
+            text-decoration: underline;
+            font-size: 0.95em;
         }
         .msg-erro {
             color: #c0392b;
-            margin-top: 10px;
             text-align: center;
+            font-size: 0.95em;
         }
-        .form-box a {
-            color: #34495e;
-            text-decoration: underline;
-            font-size: 0.98em;
+        .form-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+}
+        footer {
+            background: #3A5EFF;
+            color: white;
             text-align: center;
-            margin-top: 6px;
+            padding: 16px 10px;
         }
-        .form-box a:hover {
-            color: #2c3e50;
+        .redes img {
+            width: 24px;
+            margin: 0 8px;
+            vertical-align: middle;
+            filter: brightness(0) invert(1);
         }
     </style>
 </head>
 <body>
     <header class="topo">
-        <h1>Criar Conta ✍️</h1>
+        <img src="img/logoFofoca500.png" alt="Logo" class="logo">
+        <span><strong>Fofocas Brasil 💬</strong></span>
     </header>
 
     <div class="container">
-        <?php if (!empty($mensagem)): ?>
-            <p class="msg-erro"><?= htmlspecialchars($mensagem) ?></p>
-        <?php endif; ?>
-
         <form method="post" class="form-box">
+            <h2>Criar Conta</h2>
+            <?php if (!empty($mensagem)): ?>
+                <p class="msg-erro"><?= htmlspecialchars($mensagem) ?></p>
+            <?php endif; ?>
             <input type="text" name="nome" placeholder="Seu nome" value="<?= htmlspecialchars($_POST['nome'] ?? '') ?>" required>
             <input type="email" name="email" placeholder="Seu e-mail" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required>
             <input type="password" name="senha" placeholder="Crie uma senha" required>
-            <button type="submit">Cadastrar e Entrar</button>
-            <a href="login.php">Já tem uma conta? Faça login</a>
+            
+        
+        <a href="login.php">Já tem uma conta? Faça login</a>
+        
+        <div class="form-buttons">
+                <button type="submit">Salvar</button>
+               <button type="button" onclick="window.location.href='index.php'">Voltar</button>
+            </div>
         </form>
     </div>
+
+    <footer>
+            <div class="redes">
+             <a href="#"><i class="fab fa-instagram"></i></a>
+             <a href="#"><i class="fab fa-facebook-f"></i></a>
+             <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+        <small>© Fofocas Brasil — Todos os direitos reservados</small>
+    </footer>
 </body>
 </html>

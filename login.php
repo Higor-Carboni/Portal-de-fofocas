@@ -2,14 +2,16 @@
 require_once 'conexao.php';
 session_start();
 $mensagem = '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'] ?? '';
     $senha = $_POST['senha'] ?? '';
+
     if ($email && $senha) {
-        $sql = "SELECT * FROM usuarios WHERE email = :email";
-        $stmt = $pdo->prepare($sql);
+        $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE email = :email");
         $stmt->execute([':email' => $email]);
         $usuario = $stmt->fetch();
+
         if ($usuario && password_verify($senha, $usuario['senha'])) {
             $_SESSION['usuario_id'] = $usuario['id'];
             $_SESSION['usuario_nome'] = $usuario['nome'];
@@ -29,72 +31,68 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="style.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        body {
-            background: #f4f4f4;
+        * {
+            box-sizing: border-box;
+        }
+        html, body {
             margin: 0;
+            padding: 0;
+            background: #f0f4ff;
             font-family: 'Segoe UI', sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
-        .topo {
-            background: #2c3e50;
+        header.topo {
+            background: #3A5EFF;
             color: white;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 4px solid #1a252f;
+            padding: 10px 20px;
+            border-bottom: 4px solid #1A237E;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
-        .topo h1 {
-            margin: 0;
-            font-size: 2.2em;
-            font-weight: bold;
+        .logo {
+            height: 50px;
+            animation: girarLogo 20s linear infinite;
         }
-        .menu-superior {
-            margin-top: 10px;
-        }
-        .menu-superior a {
-            margin: 0 8px;
-            color: #ecf0f1;
-            font-weight: bold;
-            text-decoration: none;
-        }
-        .menu-superior a:hover {
-            text-decoration: underline;
+        @keyframes girarLogo {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         .container {
-            max-width: 400px;
-            margin: 40px auto 0 auto;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px #0001;
-            padding: 32px 28px 24px 28px;
-        }
-        .container h2 {
-            text-align: center;
-            color: #2c3e50;
-            margin-bottom: 18px;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .form-box {
+            background: white;
+            padding: 32px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px #0001;
             display: flex;
             flex-direction: column;
             gap: 18px;
+            width: 100%;
+            max-width: 400px;
         }
-        .form-box input[type="text"],
-        .form-box input[type="email"],
-        .form-box input[type="password"] {
+        .form-box input {
             padding: 12px;
             border: 1.5px solid #bfc9d1;
             border-radius: 8px;
             font-size: 1em;
             background: #f8fafc;
-            transition: border 0.2s;
         }
         .form-box input:focus {
-            border-color: #34495e;
+            border-color: #3A5EFF;
             outline: none;
             background: #fff;
         }
         .form-box button {
-            background: #34495e;
+            background: #3A5EFF;
             color: #fff;
             border: none;
             padding: 12px;
@@ -102,136 +100,65 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-size: 1.1em;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.2s;
         }
         .form-box button:hover {
-            background: #2c3e50;
+            background: #1A237E;
+        }
+        .form-box a {
+            text-align: center;
+            color: #3A5EFF;
+            text-decoration: underline;
+            font-size: 0.95em;
         }
         .msg-erro {
             color: #c0392b;
-            margin-top: 10px;
             text-align: center;
-        }
-        .form-box a {
-            color: #34495e;
-            text-decoration: underline;
-            font-size: 0.98em;
-        }
-        .form-box a:hover {
-            color: #2c3e50;
-        }
-        .container h2 {
-            text-align: center;
-            color: #2c3e50;
-            margin-bottom: 10px;
+            font-size: 0.95em;
         }
         footer {
-            margin-top: 40px;
-            background: #2c3e50;
-            color: #eee;
+            background: #3A5EFF;
+            color: white;
             text-align: center;
-            padding: 30px 10px;
-        }
-        .redes {
-            margin-bottom: 12px;
+            padding: 16px 10px;
         }
         .redes img {
             width: 24px;
-            margin: 0 6px;
+            margin: 0 8px;
             vertical-align: middle;
             filter: brightness(0) invert(1);
-        }
-        .form-box {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px #0001;
-            padding: 32px 28px 24px 28px;
-            margin: 30px auto 0 auto;
-            max-width: 370px;
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-        }
-        .form-box input[type="email"],
-        .form-box input[type="password"] {
-            padding: 14px;
-            border: 1.5px solid #bfc9d1;
-            border-radius: 8px;
-            font-size: 1.07em;
-            background: #f8fafc;
-            transition: border 0.2s, box-shadow 0.2s;
-            outline: none;
-        }
-        .form-box input[type="email"]:focus,
-        .form-box input[type="password"]:focus {
-            border-color: #34495e;
-            background: #fff;
-            box-shadow: 0 0 0 2px #34495e22;
-        }
-        .form-box button {
-            background: #34495e;
-            color: #fff;
-            border: none;
-            padding: 13px;
-            border-radius: 8px;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s;
-            margin-top: 8px;
-        }
-        .form-box button:hover {
-            background: #2c3e50;
-        }
-        .form-box a {
-            color: #34495e;
-            text-decoration: underline;
-            font-size: 0.98em;
-            text-align: center;
-            margin-top: 6px;
-        }
-        .form-box a:hover {
-            color: #2c3e50;
-        }
-        .msg-erro {
-            color: #c0392b;
-            margin-top: 10px;
-            text-align: center;
-        }
-        .container h2 {
-            text-align: center;
-            color: #2c3e50;
-            margin-bottom: 18px;
         }
     </style>
 </head>
 <body>
     <header class="topo">
-        <h1>Fofocas Brasil💬</h1>
-        <div class="menu-superior">
-            <a href="index.php">Início</a>
-            <a href="cadastroUsuario.php">Cadastrar</a>
-        </div>
+        <img src="img/logoFofoca500.png" alt="Logo" class="logo">
+        <span><strong>Fofocas Brasil 💬</strong></span>
     </header>
-    <main>
-        <div class="container">
+
+    <div class="container">
+        <form method="POST" class="form-box">
             <h2>Login</h2>
-            <form method="POST" class="form-box">
-                <input type="email" name="email" placeholder="E-mail" required>
-                <input type="password" name="senha" placeholder="Senha" required>
-                <button type="submit">Entrar</button>
-                <a href="cadastroUsuario.php">Ainda não tem cadastro? Cadastre-se</a>
-            </form>
-            <p class="msg-erro"><?= $mensagem ?></p>
-        </div>
-    </main>
+            <?php if (!empty($mensagem)): ?>
+                <p class="msg-erro"><?= htmlspecialchars($mensagem) ?></p>
+            <?php endif; ?>
+            <input type="email" name="email" placeholder="E-mail" required>
+            <input type="password" name="senha" placeholder="Senha" required>
+            <button type="submit">Entrar</button>
+            <button type="button" onclick="window.location.href='index.php'">Voltar</button>
+        </form>
+    </div>
+
     <footer>
         <div class="redes">
-            <a href="#"><img src="icone-instagram.png" alt="Instagram"></a>
-            <a href="#"><img src="icone-facebook.png" alt="Facebook"></a>
-            <a href="#"><img src="icone-twitter.png" alt="Twitter"></a>
+             <a href="#"><i class="fab fa-instagram"></i></a>
+             <a href="#"><i class="fab fa-facebook-f"></i></a>
+             <a href="#"><i class="fab fa-twitter"></i></a>
         </div>
         <small>© Fofocas Brasil — Todos os direitos reservados</small>
     </footer>
+
+    <button id="topo" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
+    ↑
+</button>
 </body>
 </html>

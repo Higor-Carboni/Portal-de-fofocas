@@ -28,10 +28,12 @@ $noticias = $stmt->fetchAll();
     <meta charset="UTF-8">
     <title>Fofoquinha News 💬</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
     <header class="topo">
+    <div class="cabecalho-container">
         <img src="img/logoFofoca500.png" alt="Logo" class="logo">
         <div class="menu-superior">
             <?php if (isset($_SESSION['usuario_id'])): ?>
@@ -47,7 +49,8 @@ $noticias = $stmt->fetchAll();
                 <a href="login.php">Login</a>
             <?php endif; ?>
         </div>
-    </header>
+    </div>
+</header>
 
     <div class="filtros-categorias">
         <button onclick="window.location.href='index.php'">Todas</button>
@@ -57,7 +60,8 @@ $noticias = $stmt->fetchAll();
     </div>
 
     <main class="conteudo">
-        <?php if ($noticias): ?>
+    <?php if ($noticias): ?>
+        <div class="grade-cards">
             <?php foreach ($noticias as $n): ?>
                 <article class="card-noticia">
                     <?php if ($n['imagem']): ?>
@@ -75,19 +79,36 @@ $noticias = $stmt->fetchAll();
                     </div>
                 </article>
             <?php endforeach; ?>
-        <?php else: ?>
-            <p class="sem-noticia">😢 Nenhuma fofoca publicada ainda.</p>
-        <?php endif; ?>
-    </main>
+        </div>
+    <?php else: ?>
+        <p class="sem-noticia">😢 Nenhuma fofoca publicada ainda.</p>
+    <?php endif; ?>
+</main>
 
     <footer>
         <div class="redes">
-            <a href="#"><img src="icone-instagram.png" alt="Instagram"></a>
-            <a href="#"><img src="icone-facebook.png" alt="Facebook"></a>
-            <a href="#"><img src="icone-twitter.png" alt="Twitter"></a>
+             <a href="#"><i class="fab fa-instagram"></i></a>
+             <a href="#"><i class="fab fa-facebook-f"></i></a>
+             <a href="#"><i class="fab fa-twitter"></i></a>
         </div>
         <small>© Fofocas Brasil — Todos os direitos reservados</small>
     </footer>
+
+  <button id="topo" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+<script>
+    window.addEventListener('scroll', function () {
+        const btn = document.getElementById('topo');
+        if (window.scrollY > 300) {
+            btn.style.display = 'block';
+        } else {
+            btn.style.display = 'none';
+        }
+    });
+</script>
+
 </body>
 
 </html>

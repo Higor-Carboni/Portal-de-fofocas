@@ -33,81 +33,77 @@ $noticias = $stmt->fetchAll();
 
 <body>
     <header class="topo">
-    <div class="cabecalho-container">
-        <img src="img/logoFofoca500.png" alt="Logo" class="logo">
-        <div class="menu-superior">
-            <?php if (isset($_SESSION['usuario_id'])): ?>
-                <span>👤 <?= $_SESSION['usuario_nome'] ?></span>
-                <a href="cadastroNoticia.php">+ Nova</a>
-                <a href="dashboard.php">Dashboard</a>
-                <a href="logout.php">Sair</a>
-                <?php if ($_SESSION['usuario_perfil'] === 'admin'): ?>
-                    <a href="usuarios.php">Usuários</a>
+        <div class="cabecalho-container">
+            <img src="img/logoFofoca500.png" alt="Logo" class="logo">
+            <div class="menu-superior">
+                <?php if (isset($_SESSION['usuario_id'])): ?>
+                    <span>👤 <?= $_SESSION['usuario_nome'] ?></span>
+                    <a href="cadastroNoticia.php">+ Nova</a>
+                    <a href="dashboard.php">Dashboard</a>
+                    <a href="cadastroUsuario.php">Cadastrar</a>
+                    <a href="logout.php">Sair</a>
+                    <?php if ($_SESSION['usuario_perfil'] === 'admin'): ?>
+                        <a href="usuarios.php">Usuários</a>
+                    <?php endif; ?>
+                <?php else: ?>
+                    <a href="login.php">Login</a>
                 <?php endif; ?>
-            <?php else: ?>
-                <a href="cadastroUsuario.php">Cadastrar</a>
-                <a href="login.php">Login</a>
-            <?php endif; ?>
+            </div>
         </div>
-    </div>
-</header>
+    </header>
 
     <div class="filtros-categorias">
         <button onclick="window.location.href='index.php'">Todas</button>
         <?php foreach ($categorias as $cat): ?>
-            <button onclick="window.location.href='?categoria=<?= $cat['id'] ?>'"><?= htmlspecialchars($cat['nome']) ?></button>
+            <button
+                onclick="window.location.href='?categoria=<?= $cat['id'] ?>'"><?= htmlspecialchars($cat['nome']) ?></button>
         <?php endforeach; ?>
     </div>
 
     <main class="conteudo">
-    <?php if ($noticias): ?>
-        <div class="grade-cards">
-            <?php foreach ($noticias as $n): ?>
-                <article class="card-noticia">
-                    <?php if ($n['imagem']): ?>
-                        <img src="<?= htmlspecialchars($n['imagem']) ?>" alt="Imagem da notícia">
-                    <?php endif; ?>
-                    <div class="texto">
-                        <h2><?= htmlspecialchars($n['titulo']) ?></h2>
-                        <p><?= resumo($n['noticia'], 150) ?></p>
-                        <small>
-                            Por <strong><?= htmlspecialchars($n['autor_nome']) ?></strong> em
-                            <?= date("d/m/Y H:i", strtotime($n['data'])) ?> |
-                            Categoria: <?= htmlspecialchars($n['categoria_nome']) ?>
-                        </small>
-                        <a href="noticia.php?id=<?= $n['id'] ?>" class="ler-mais">Ler mais</a>
-                    </div>
-                </article>
-            <?php endforeach; ?>
-        </div>
-    <?php else: ?>
-        <p class="sem-noticia">😢 Nenhuma fofoca publicada ainda.</p>
-    <?php endif; ?>
-</main>
+        <?php if ($noticias): ?>
+            <div class="grade-cards">
+                <?php foreach ($noticias as $n): ?>
+                    <article class="card-noticia">
+                        <?php if ($n['imagem']): ?>
+                            <img src="<?= htmlspecialchars($n['imagem']) ?>" alt="Imagem da notícia">
+                        <?php endif; ?>
+                        <div class="texto">
+                            <h2><?= htmlspecialchars($n['titulo']) ?></h2>
+                            <p><?= resumo($n['noticia'], 150) ?></p>
+                            <!-- Removido o <small> com autor, data e categoria -->
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+            </div>
+        <?php else: ?>
+            <p class="sem-noticia">😢 Nenhuma fofoca publicada ainda.</p>
+        <?php endif; ?>
+    </main>
 
     <footer>
         <div class="redes">
-             <a href="#"><i class="fab fa-instagram"></i></a>
-             <a href="#"><i class="fab fa-facebook-f"></i></a>
-             <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
         </div>
         <small>© Fofocas Brasil — Todos os direitos reservados</small>
     </footer>
 
-  <button id="topo" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
-    <i class="fas fa-arrow-up"></i>
-</button>
+    <button id="topo" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
-<script>
-    window.addEventListener('scroll', function () {
-        const btn = document.getElementById('topo');
-        if (window.scrollY > 300) {
-            btn.style.display = 'block';
-        } else {
-            btn.style.display = 'none';
-        }
-    });
-</script>
+    <script>
+        window.addEventListener('scroll', function () {
+            const btn = document.getElementById('topo');
+            if (window.scrollY > 300) {
+                btn.style.display = 'block';
+            } else {
+                btn.style.display = 'none';
+            }
+        });
+    </script>
 
 </body>
 

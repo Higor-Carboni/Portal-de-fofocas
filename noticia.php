@@ -42,8 +42,7 @@ if (!$noticia) die('Notícia não encontrada.');
             gap: 16px;
         }
         .logo {
-            height: 70px;
-            animation: girarLogo 20s linear infinite;
+            height: 200px;
         }
         @keyframes girarLogo {
             0% { transform: rotate(0deg); }
@@ -137,9 +136,7 @@ if (!$noticia) die('Notícia não encontrada.');
 <body>
 <div class="wrapper">
     <header class="topo">
-        <img src="img/logoFofoca500.png" alt="Logo" class="logo">
-        <h1>Fofocas Brasil 💬</h1>
-        
+        <img src="img/logoFofoca500.png" alt="Logo" class="logo">        
     </header>
 
     <main>

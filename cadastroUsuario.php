@@ -66,7 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
        .logo {
             height: 100px;
-            animation: girarLogo 20s linear infinite;
             transform-origin: center;
         }
         @keyframes girarLogo {
@@ -148,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <header class="topo">
         <img src="img/logoFofoca500.png" alt="Logo" class="logo">
-        <span><strong>Fofocas Brasil 💬</strong></span>
+       
     </header>
 
     <div class="container">

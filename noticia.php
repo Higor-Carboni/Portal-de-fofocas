@@ -14,9 +14,9 @@ if (!$noticia) die('Notícia não encontrada.');
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title><?= htmlspecialchars($noticia['titulo']) ?> - Fofocas Brasil</title>
+    <title><?= htmlspecialchars($noticia['titulo']) ?> - Fofoquei News</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
+    <!-- <style>
         * {
             box-sizing: border-box;
         }
@@ -131,7 +131,7 @@ if (!$noticia) die('Notícia não encontrada.');
         #topo:hover {
             background: #1A237E;
         }
-    </style>
+    </style> -->
 </head>
 <body>
 <div class="wrapper">
@@ -162,7 +162,7 @@ if (!$noticia) die('Notícia não encontrada.');
             <a href="#"><i class="fab fa-facebook-f"></i></a>
             <a href="#"><i class="fab fa-twitter"></i></a>
         </div>
-        <small>© Fofocas Brasil — Todos os direitos reservados</small>
+        <small>© Fofoquei News — Todos os direitos reservados</small>
     </footer>
 </div>
 

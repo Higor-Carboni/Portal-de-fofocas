@@ -3,9 +3,8 @@ declare(strict_types=1);
 require 'verifica_login.php';
 require 'conexao.php';
 
-// Dados
-
-$stmt = $pdo->prepare("SELECT * FROM noticias WHERE autor = ?");
+// Dados do dashboard
+$stmt = $pdo->prepare("SELECT n.*, u.nome AS autor_nome FROM noticias n JOIN usuarios u ON u.id = n.autor WHERE n.autor = ?");
 $stmt->execute([$_SESSION['usuario_id']]);
 $noticias = $stmt->fetchAll();
 
@@ -14,267 +13,219 @@ $noticiasHoje = $pdo->query("SELECT COUNT(*) FROM noticias WHERE DATE(data) = CU
 $noticiasSemana = $pdo->query("SELECT COUNT(*) FROM noticias WHERE YEARWEEK(data, 1) = YEARWEEK(CURDATE(), 1)")->fetchColumn();
 
 $categorias = $pdo->query("SELECT c.nome, COUNT(n.id) AS total FROM categorias c LEFT JOIN noticias n ON n.categoria_id = c.id GROUP BY c.id")->fetchAll();
-
-$usuarios = $pdo->query("SELECT u.id, u.nome, COUNT(n.id) AS total FROM usuarios u LEFT JOIN noticias n ON n.autor = u.id GROUP BY u.id")->fetchAll();
+$usuarios = $pdo->query("SELECT u.nome, COUNT(n.id) AS total FROM usuarios u LEFT JOIN noticias n ON n.autor = u.id GROUP BY u.nome")->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Dashboard - Portal de Notícias</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        * { box-sizing: border-box; }
-        html, body {
-            margin: 0;
-            padding: 0;
-            background: #f0f4ff;
-            font-family: 'Segoe UI', sans-serif;
-            height: 100%;
-        }
-        .wrapper {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        header.topo {
-            background: #3A5EFF;
-            color: white;
-            padding: 12px 20px;
-            border-bottom: 4px solid #1A237E;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-        .logo {
-            height: 70px;
-            animation: girarLogo 20s linear infinite;
-        }
-        @keyframes girarLogo {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .dashboard-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        .card {
-            background: white;
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            height: 100px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .buttons {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-        .buttons a {
-            background: #3A5EFF;
-            color: white;
-            padding: 10px 16px;
-            border-radius: 6px;
-            text-decoration: none;
-        }
-        .buttons a:hover {
-            background: #1A237E;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-            margin-top: 20px;
-        }
-        th, td {
-            padding: 12px;
-            border-bottom: 1px solid #ddd;
-        }
-        th {
-            background: #f0f4ff;
-        }
-        .chart-container {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-        footer {
-            background: #3A5EFF;
-            color: white;
-            text-align: center;
-            padding: 20px 10px;
-        }
-        .redes a {
-            color: white;
-            margin: 0 10px;
-            font-size: 22px;
-        }
-        .redes a:hover {
-            color: #cfd8ff;
-        }
-        .form-buttons {
-            margin: 20px 0;
-            text-align: center;
-        }
-        .btn-voltar {
-            background: #3A5EFF;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-        }
-        .btn-voltar:hover {
-            background: #1A237E;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Portal de Notícias</title>
+
+  <!-- Estilos base -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/footer.css">
+
+  <!-- Estilo do header exclusivo para ADMIN -->
+  <?php if ($_SESSION['usuario_perfil'] === 'admin'): ?>
+    <link rel="stylesheet" href="css/headerAdmin.css">
+    <?php else: ?>
+    <!-- Estilo do header exclusivo para Isuario Comum -->
+     <link rel="Stylesheet" href="css/header.css">
+    <?php endif; ?>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Chart.js (se necessário) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
-<div class="wrapper">
-    <header class="topo">
-        <img src="img/logoFofoca500.png" alt="Logo" class="logo">
-        <h1>Fofocas Brasil 💬</h1>
-    </header>
+    <div class="wrapper">
+        <?php include 'includes/header.php'; ?>
 
-    <main style="flex: 1; padding: 20px;">
-        <h1>📊 Painel de Controle</h1>
+        <main class="conteudo-dashboard">
+            <h1 class="titulo-dashboard">📊 Painel de Controle</h1>
+            <p style="text-align: center;">
+                Bem-vindo(a), <?= $_SESSION['usuario_nome'] ?>! Acompanhe suas estatísticas e gerencie suas notícias.
+            </p>
 
-        <div class="buttons">
-            <a href="cadastroNoticia.php">+ Nova Notícia</a>
-            <a href="alterarUsuario.php">Editar Perfil</a>
-            <a href="usuarios.php">Gerenciar Usuários</a>
-        </div>
-
-        <div class="dashboard-cards">
-            <div class="card">
-                <h3>Total de Notícias</h3>
-                <p><strong><?= $totalNoticias ?></strong></p>
+            <div class="botoes-navegacao">
+                <a href="#categoriasChart-container">📂 Notícias por Categoria</a>
+                <a href="#usuariosChart-container">👥 Usuários / Redatores</a>
+                <a href="#noticiasPeriodoChart-container">📅 Hoje x Esta Semana</a>
+                <a href="#suas-noticias-container">📰 Notícias</a>
             </div>
-            <div class="card">
-                <h3>Hoje</h3>
-                <p><strong><?= $noticiasHoje ?></strong></p>
+
+            <div class="cards-info-inline">
+                <div class="card-info-inline">
+                    <h3>Total de Notícias</h3>
+                    <p><?= intval($totalNoticias) ?></p>
+                </div>
+                <div class="card-info-inline">
+                    <h3>Publicadas Hoje</h3>
+                    <p><?= intval($noticiasHoje) ?></p>
+                </div>
+                <div class="card-info-inline">
+                    <h3>Esta Semana</h3>
+                    <p><?= intval($noticiasSemana) ?></p>
+                </div>
             </div>
-            <div class="card">
-                <h3>Esta Semana</h3>
-                <p><strong><?= $noticiasSemana ?></strong></p>
+
+            <div class="graficos-dashboard">
+                <div class="grafico-box" id="categoriasChart-container">
+                    <h3>Notícias por Categoria</h3>
+                    <canvas id="categoriasChart"></canvas>
+                </div>
+                <div class="grafico-box" id="usuariosChart-container">
+                    <h3>Usuários / Redatores</h3>
+                    <canvas id="usuariosChart"></canvas>
+                </div>
+                <div class="grafico-box" id="noticiasPeriodoChart-container">
+                    <h3>Hoje x Esta Semana</h3>
+                    <canvas id="noticiasPeriodoChart"></canvas>
+                </div>
             </div>
-        </div>
 
-        <div class="chart-container">
-            <h3>Notícias por Categoria</h3>
-            <canvas id="categoriasChart"></canvas>
-        </div>
-        <div class="chart-container">
-            <h3>Usuários / Redatores</h3>
-            <canvas id="usuariosChart"></canvas>
-        </div>
-        <div class="chart-container">
-            <h3>Hoje x Esta Semana</h3>
-            <canvas id="noticiasPeriodoChart"></canvas>
-        </div>
+            <div id="suas-noticias-container">
+                <h2>Notícias</h2>
+                <table class="tabela-noticias">
+                    <thead>
+                        <tr>
+                            <th>Autor</th>
+                            <th>Título</th>
+                            <th>Resumo</th>
+                            <th>Data</th>
+                            <th>Imagem</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($noticias as $n): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($n['autor_nome']) ?></td>
+                                <td><?= htmlspecialchars($n['titulo']) ?></td>
+                                <td><?= substr(strip_tags($n['noticia']), 0, 30) ?>...</td>
+                                <td><?= $n['data'] ?></td>
+                                <td>
+                                    <?php if ($n['imagem']): ?>
+                                        <img src="<?= htmlspecialchars($n['imagem']) ?>" alt="imagem">
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if ($_SESSION['usuario_perfil'] === 'admin'): ?>
+                                        <a href="alterarNoticia.php?id=<?= $n['id'] ?>" class="btn-editar" title="Editar">
+                                            <i class="fas fa-pen"></i>
+                                        </a>
+                                        <a href="excluir_noticia.php?id=<?= $n['id'] ?>" class="btn-excluir" title="Excluir"
+                                           onclick="return confirm('Excluir esta notícia?')">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    <?php else: ?>
+                                        <a href="solicitar.php?id=<?= $n['id'] ?>&tipo=editar" class="btn-editar" title="Solicitar edição">
+                                            <i class="fas fa-pen"></i>
+                                        </a>
+                                        <a href="solicitar.php?id=<?= $n['id'] ?>&tipo=excluir" class="btn-excluir" title="Solicitar exclusão"
+                                           onclick="return confirm('Deseja solicitar a exclusão desta notícia?')">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
 
-        <h2>Suas Notícias</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Título</th>
-                    <th>Resumo</th>
-                    <th>Data</th>
-                    <th>Imagem</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($noticias as $n): ?>
-                <tr>
-                    <td><?= $n['id'] ?></td>
-                    <td><?= htmlspecialchars($n['titulo']) ?></td>
-                    <td><?= substr(strip_tags($n['noticia']), 0, 30) ?>...</td>
-                    <td><?= $n['data'] ?></td>
-                    <td>
-                        <?php if ($n['imagem']): ?>
-                            <img src="<?= htmlspecialchars($n['imagem']) ?>" style="max-width:60px;">
-                        <?php endif; ?>
-                    </td>
-                    <td>
-                        <a href="alterarNoticia.php?id=<?= $n['id'] ?>" class="buttons">✏️</a>
-                        <a href="excluir_noticia.php?id=<?= $n['id'] ?>" class="buttons" style="background:#c00;">❌</a>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+            <div style="text-align: right; margin-bottom: -12px;">
+                <a href="cadastroNoticia.php" class="btn-cadastrar-noticia" title="Nova Notícia">
+                    <i class="fas fa-plus"></i>
+                </a>
+            </div>
+            <div class="form-botoes">
+                <button onclick="window.location.href='index.php'">Voltar</button>
+            </div>
+        </main>
 
-        <div class="form-buttons">
-            <button class="btn-voltar" type="button" onclick="window.location.href='index.php'">Voltar</button>
-        </div>
-    </main>
+        <?php include 'includes/footer.php'; ?>
+    </div>
 
-    <footer>
-        <div class="redes">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-        </div>
-        <small>© Fofocas Brasil — Todos os direitos reservados</small>
-    </footer>
-</div>
+    <!-- Botão para voltar ao topo -->
+    <button id="topo" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
-<script>
-new Chart(document.getElementById('categoriasChart'), {
-    type: 'bar',
-    data: {
-        labels: <?= json_encode(array_column($categorias, 'nome')) ?>,
-        datasets: [{
-            label: 'Notícias por Categoria',
-            data: <?= json_encode(array_column($categorias, 'total')) ?>,
-            backgroundColor: '#36A2EB'
-        }]
-    }
-});
+    <script>
+        new Chart(document.getElementById('categoriasChart'), {
+            type: 'bar',
+            data: {
+                labels: <?= json_encode(array_column($categorias, 'nome')) ?>,
+                datasets: [{
+                    label: 'Notícias por Categoria',
+                    data: <?= json_encode(array_column($categorias, 'total')) ?>,
+                    backgroundColor: '#36A2EB'
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: { stepSize: 1 }
+                    }
+                }
+            }
+        });
+        new Chart(document.getElementById('usuariosChart'), {
+            type: 'bar',
+            data: {
+                labels: <?= json_encode(array_column($usuarios, 'nome')) ?>,
+                datasets: [{
+                    label: 'Notícias Publicadas',
+                    data: <?= json_encode(array_column($usuarios, 'total')) ?>,
+                    backgroundColor: '#3A5EFF'
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: { stepSize: 1 }
+                    }
+                }
+            }
+        });
 
-new Chart(document.getElementById('usuariosChart'), {
-    type: 'bar',
-    data: {
-        labels: <?= json_encode(array_column($usuarios, 'nome')) ?>,
-        datasets: [{
-            label: 'Notícias Publicadas',
-            data: <?= json_encode(array_column($usuarios, 'total')) ?>,
-            backgroundColor: '#3A5EFF'
-        }]
-    }
-});
+        new Chart(document.getElementById('noticiasPeriodoChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Hoje', 'Esta Semana'],
+                datasets: [{
+                    label: 'Notícias',
+                    data: [<?= intval($noticiasHoje) ?>, <?= intval($noticiasSemana) ?>],
+                    backgroundColor: ['#FF6384', '#36A2EB']
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: { stepSize: 1 }
+                    }
+                }
+            }
+        });
 
-new Chart(document.getElementById('noticiasPeriodoChart'), {
-    type: 'bar',
-    data: {
-        labels: ['Hoje', 'Esta Semana'],
-        datasets: [{
-            label: 'Notícias',
-            data: [<?= $noticiasHoje ?>, <?= $noticiasSemana ?>],
-            backgroundColor: ['#FF6384', '#36A2EB']
-        }]
-    }
-});
-</script>
+        // Botão para exibir topo
+        window.addEventListener('scroll', function () {
+            const btn = document.getElementById('topo');
+            btn.style.display = window.scrollY > 300 ? 'block' : 'none';
+        });
+    </script>
 </body>
+
 </html>

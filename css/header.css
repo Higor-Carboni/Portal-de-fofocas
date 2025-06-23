@@ -1,0 +1,78 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* Header principal */
+.topo {
+  background: #232b3f;
+  height: 100px; /* mantém sua altura original */
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 12px #0002;
+  width: 100%;
+}
+
+/* Container interno do header */
+.cabecalho-container {
+  width: 100%;
+  padding: 0 24px; /* evita que os itens grudem nas bordas */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.logo {
+  height: 190px; 
+  width: auto;
+  display: block;
+}
+
+/* Menu superior */
+.menu-superior {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.menu-superior a,
+.menu-superior span {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1em;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+
+.menu-superior a:hover {
+  background: #3a4666;
+}
+
+.header-user-info {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.admin-links {
+  display: flex;
+  gap: 16px;
+}
+
+.admin-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.admin-links a:hover {
+  background-color: #3a4666;
+}

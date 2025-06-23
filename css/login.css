@@ -1,0 +1,80 @@
+/* layout base */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #f4f6fa;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.conteudo-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* ocupa toda a altura da tela */
+}
+
+.conteudo {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
+
+/* formulário de login */
+.form-box {
+  background: white;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px #0002;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 380px;
+}
+
+.form-box h2 {
+  margin: 0 0 10px 0;
+  text-align: center;
+  color: #232b3f;
+}
+
+.form-box input {
+  padding: 12px;
+  border: 1.5px solid #ccc;
+  border-radius: 6px;
+  font-size: 1em;
+  background: #f9fbfd;
+}
+
+.form-box input:focus {
+  border-color: #232b3f;
+  outline: none;
+}
+
+.form-box button {
+  background: #232b3f;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.form-box button:hover {
+  background: #3a4666;
+}
+
+/* mensagem de erro */
+.form-box .msg-erro {
+  color: #c62828;
+  background: #ffeaea;
+  border: 1px solid #ffcdd2;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 0.95em;
+  text-align: center;
+}

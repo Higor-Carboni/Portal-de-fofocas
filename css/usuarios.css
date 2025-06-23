@@ -1,0 +1,149 @@
+h2.titulo-pagina {
+  text-align: center;
+  color: #232b3f;
+  margin-top: 24px;
+}
+
+.tabela-container {
+  width: 95%;
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow-x: auto;
+}
+
+table.usuarios {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #0002;
+  margin: 20px 0;
+}
+
+table.usuarios th,
+table.usuarios td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+table.usuarios th {
+  background-color: #232b3f;
+  color: white;
+}
+
+.btn-acoes a {
+  margin-right: 6px;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  color: white;
+  font-size: 0.9em;
+}
+
+.btn-editar { background: #3498db; }
+.btn-excluir { background: #e74c3c; }
+.btn-promover { background: #27ae60; }
+.btn-rebaixar { background: #f39c12; }
+
+.form-botoes {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.form-botoes button {
+  background: #232b3f;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.form-botoes button:hover {
+  background: #3a4666;
+}
+
+.acoes-usuarios {
+  display: flex;
+  justify-content: flex-end;
+  max-width: 1000px;
+  width: 95%;
+  margin: 12px auto 0 auto;
+}
+
+/* .btn-cadastrar-usuario {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #3a4666;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.btn-cadastrar-usuario:hover {
+  background: #2c3550;
+} */
+
+.btn-cadastrar-usuario {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #b51717;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: background 0.2s ease;
+}
+
+.btn-cadastrar-usuario:hover {
+  background: #2c3550;
+}
+
+/* Responsividade */
+@media screen and (max-width: 768px) {
+  table.usuarios thead {
+    display: none;
+  }
+
+  table.usuarios tbody tr {
+    display: block;
+    margin-bottom: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 6px #0001;
+    padding: 10px;
+  }
+
+  table.usuarios td {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  table.usuarios td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: #333;
+  }
+
+  .btn-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-start;
+  }
+}

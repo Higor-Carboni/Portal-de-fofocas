@@ -4,8 +4,14 @@ require 'verifica_login.php';
 require 'conexao.php';
 
 // Dados do dashboard
-$stmt = $pdo->prepare("SELECT n.*, u.nome AS autor_nome FROM noticias n JOIN usuarios u ON u.id = n.autor WHERE n.autor = ?");
-$stmt->execute([$_SESSION['usuario_id']]);
+if ($_SESSION['usuario_perfil'] === 'admin') {
+    // Admin vê todas as notícias
+    $stmt = $pdo->query("SELECT n.*, u.nome AS autor_nome FROM noticias n JOIN usuarios u ON u.id = n.autor ORDER BY n.data DESC");
+} else {
+    // Usuário comum vê apenas suas próprias
+    $stmt = $pdo->prepare("SELECT n.*, u.nome AS autor_nome FROM noticias n JOIN usuarios u ON u.id = n.autor WHERE n.autor = ? ORDER BY n.data DESC");
+    $stmt->execute([$_SESSION['usuario_id']]);
+}
 $noticias = $stmt->fetchAll();
 
 $totalNoticias = $pdo->query("SELECT COUNT(*) FROM noticias")->fetchColumn();
@@ -19,29 +25,97 @@ $usuarios = $pdo->query("SELECT u.nome, COUNT(n.id) AS total FROM usuarios u LEF
 <html lang="pt-br">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard - Portal de Notícias</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Portal de Notícias</title>
 
-  <!-- Estilos base -->
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/dashboard.css">
-  <link rel="stylesheet" href="css/footer.css">
-
-  <!-- Estilo do header exclusivo para ADMIN -->
-  <?php if ($_SESSION['usuario_perfil'] === 'admin'): ?>
+    <!-- Estilos base -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/headerAdmin.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Estilo do header exclusivo para ADMIN -->
+    <?php if ($_SESSION['usuario_perfil'] === 'admin'): ?>
+        <link rel="stylesheet" href="css/headerAdmin.css">
     <?php else: ?>
-    <!-- Estilo do header exclusivo para Isuario Comum -->
-     <link rel="Stylesheet" href="css/header.css">
+        <!-- Estilo do header exclusivo para Isuario Comum -->
+        <link rel="Stylesheet" href="css/header.css">
     <?php endif; ?>
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <!-- Chart.js (se necessário) -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Chart.js (se necessário) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const categoriasChart = new Chart(document.getElementById('categoriasChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Política', 'Esportes', 'Entretenimento'],
+                datasets: [{
+                    label: 'Notícias',
+                    data: [12, 19, 7],
+                    backgroundColor: '#6C63FF'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { labels: { color: '#232b3f' } }
+                },
+                scales: {
+                    x: { ticks: { color: '#232b3f' } },
+                    y: { ticks: { color: '#232b3f' }, beginAtZero: true }
+                }
+            }
+        });
+
+        const usuariosChart = new Chart(document.getElementById('usuariosChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Usuários', 'Redatores'],
+                datasets: [{
+                    label: 'Total',
+                    data: [40, 10],
+                    backgroundColor: ['#6C63FF', '#E2725B']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { labels: { color: '#232b3f' } }
+                }
+            }
+        });
+
+        const noticiasPeriodoChart = new Chart(document.getElementById('noticiasPeriodoChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Hoje', 'Esta Semana'],
+                datasets: [{
+                    label: 'Notícias',
+                    data: [2, 12],
+                    backgroundColor: '#E2725B'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { labels: { color: '#232b3f' } }
+                },
+                scales: {
+                    x: { ticks: { color: '#232b3f' } },
+                    y: { ticks: { color: '#232b3f' }, beginAtZero: true }
+                }
+            }
+        });
+    </script>
 </head>
-
 <body>
     <div class="wrapper">
         <?php include 'includes/header.php'; ?>
@@ -73,21 +147,23 @@ $usuarios = $pdo->query("SELECT u.nome, COUNT(n.id) AS total FROM usuarios u LEF
                     <p><?= intval($noticiasSemana) ?></p>
                 </div>
             </div>
-
-            <div class="graficos-dashboard">
-                <div class="grafico-box" id="categoriasChart-container">
-                    <h3>Notícias por Categoria</h3>
-                    <canvas id="categoriasChart"></canvas>
+            
+            <section class="area-graficos">
+                <div class="graficos-dashboard">
+                    <div class="grafico-box" id="categoriasChart-container">
+                        <h3>Notícias por Categoria</h3>
+                        <canvas id="categoriasChart"></canvas>
+                    </div>
+                    <div class="grafico-box" id="usuariosChart-container">
+                        <h3>Usuários / Redatores</h3>
+                        <canvas id="usuariosChart"></canvas>
+                    </div>
+                    <div class="grafico-box" id="noticiasPeriodoChart-container">
+                        <h3>Hoje x Esta Semana</h3>
+                        <canvas id="noticiasPeriodoChart"></canvas>
+                    </div>
                 </div>
-                <div class="grafico-box" id="usuariosChart-container">
-                    <h3>Usuários / Redatores</h3>
-                    <canvas id="usuariosChart"></canvas>
-                </div>
-                <div class="grafico-box" id="noticiasPeriodoChart-container">
-                    <h3>Hoje x Esta Semana</h3>
-                    <canvas id="noticiasPeriodoChart"></canvas>
-                </div>
-            </div>
+            </section>
 
             <div id="suas-noticias-container">
                 <h2>Notícias</h2>
@@ -108,7 +184,7 @@ $usuarios = $pdo->query("SELECT u.nome, COUNT(n.id) AS total FROM usuarios u LEF
                                 <td><?= htmlspecialchars($n['autor_nome']) ?></td>
                                 <td><?= htmlspecialchars($n['titulo']) ?></td>
                                 <td><?= substr(strip_tags($n['noticia']), 0, 30) ?>...</td>
-                                <td><?= $n['data'] ?></td>
+                                <td><?= date('d/m/Y H:i', strtotime($n['data'])) ?></td>
                                 <td>
                                     <?php if ($n['imagem']): ?>
                                         <img src="<?= htmlspecialchars($n['imagem']) ?>" alt="imagem">
@@ -120,15 +196,17 @@ $usuarios = $pdo->query("SELECT u.nome, COUNT(n.id) AS total FROM usuarios u LEF
                                             <i class="fas fa-pen"></i>
                                         </a>
                                         <a href="excluir_noticia.php?id=<?= $n['id'] ?>" class="btn-excluir" title="Excluir"
-                                           onclick="return confirm('Excluir esta notícia?')">
+                                            onclick="return confirm('Excluir esta notícia?')">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     <?php else: ?>
-                                        <a href="solicitar.php?id=<?= $n['id'] ?>&tipo=editar" class="btn-editar" title="Solicitar edição">
+                                        <a href="solicitar.php?id=<?= $n['id'] ?>&tipo=editar" class="btn-editar"
+                                            title="Solicitar edição">
                                             <i class="fas fa-pen"></i>
                                         </a>
-                                        <a href="solicitar.php?id=<?= $n['id'] ?>&tipo=excluir" class="btn-excluir" title="Solicitar exclusão"
-                                           onclick="return confirm('Deseja solicitar a exclusão desta notícia?')">
+                                        <a href="solicitar.php?id=<?= $n['id'] ?>&tipo=excluir" class="btn-excluir"
+                                            title="Solicitar exclusão"
+                                            onclick="return confirm('Deseja solicitar a exclusão desta notícia?')">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     <?php endif; ?>
@@ -145,7 +223,7 @@ $usuarios = $pdo->query("SELECT u.nome, COUNT(n.id) AS total FROM usuarios u LEF
                 </a>
             </div>
             <div class="form-botoes">
-                <button onclick="window.location.href='index.php'">Voltar</button>
+                <button onclick="window.location.href='dashboard.php'">Voltar</button>
             </div>
         </main>
 

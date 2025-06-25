@@ -22,55 +22,64 @@ $solicitacoes = $stmt->fetchAll();
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Painel de Solicitações</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/dashboard.css">
+       <link rel="stylesheet" href="css/headerAdmin.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-<body>
-<?php include 'includes/header.php'; ?>
-<main class="conteudo-dashboard">
-    <h1 class="titulo-dashboard">📥 Solicitações de Usuários</h1>
 
-    <?php if (empty($solicitacoes)): ?>
-        <p>Nenhuma solicitação encontrada.</p>
-    <?php else: ?>
-        <table class="tabela-noticias">
-            <thead>
-                <tr>
-                    <th>Usuário</th>
-                    <th>Notícia</th>
-                    <th>Tipo</th>
-                    <th>Data</th>
-                    <th>Status</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($solicitacoes as $s): ?>
+<body>
+    <div class="conteudo-page">
+    <?php include 'includes/header.php'; ?>
+
+    <main class="conteudo-dashboard">
+        <h1 class="titulo-dashboard">📥 Solicitações de Usuários</h1>
+
+        <?php if (empty($solicitacoes)): ?>
+            <p>Nenhuma solicitação encontrada.</p>
+        <?php else: ?>
+            <table class="tabela-noticias">
+                <thead>
                     <tr>
-                        <td><?= htmlspecialchars($s['usuario_nome']) ?></td>
-                        <td><?= htmlspecialchars($s['titulo']) ?></td>
-                        <td><?= ucfirst($s['tipo']) ?></td>
-                        <td><?= date('d/m/Y H:i', strtotime($s['data_solicitacao'])) ?></td>
-                        <td><?= ucfirst($s['status']) ?></td>
-                        <td>
-                            <?php if ($s['status'] === 'pendente'): ?>
-                                <a href="processarSolicitacao.php?id=<?= $s['id'] ?>&acao=aprovar" class="btn-editar">Aprovar</a>
-                                <a href="processarSolicitacao.php?id=<?= $s['id'] ?>&acao=rejeitar" class="btn-excluir" onclick="return confirm('Deseja rejeitar esta solicitação?')">Rejeitar</a>
-                            <?php else: ?>
-                                <em>Processada</em>
-                            <?php endif; ?>
-                        </td>
+                        <th>Usuário</th>
+                        <th>Notícia</th>
+                        <th>Tipo</th>
+                        <th>Data</th>
+                        <th>Status</th>
+                        <th>Ações</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    <?php endif; ?>
-</main>
-<?php include 'includes/footer.php'; ?>
+                </thead>
+                <tbody>
+                    <?php foreach ($solicitacoes as $s): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($s['usuario_nome']) ?></td>
+                            <td><?= htmlspecialchars($s['titulo']) ?></td>
+                            <td><?= ucfirst($s['tipo']) ?></td>
+                            <td><?= date('d/m/Y H:i', strtotime($s['data_solicitacao'])) ?></td>
+                            <td><?= ucfirst($s['status']) ?></td>
+                            <td>
+                                <?php if ($s['status'] === 'pendente'): ?>
+                                    <a href="processarSolicitacao.php?id=<?= $s['id'] ?>&acao=aprovar"
+                                        class="btn-editar">Aprovar</a>
+                                    <a href="processarSolicitacao.php?id=<?= $s['id'] ?>&acao=rejeitar" class="btn-excluir"
+                                        onclick="return confirm('Deseja rejeitar esta solicitação?')">Rejeitar</a>
+                                <?php else: ?>
+                                    <em>Processada</em>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php endif; ?>
+    </main>
+    <?php include 'includes/footer.php'; ?>
+    </div>
 </body>
 </html>

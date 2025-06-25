@@ -9,12 +9,30 @@ if (!isset($_SESSION['usuario_id'])) {
 }
 
 $id = $_GET['id'] ?? 0;
-$stmt = $pdo->prepare("SELECT * FROM noticias WHERE id = ? AND autor = ?");
-$stmt->execute([$id, $_SESSION['usuario_id']]);
+
+if ($_SESSION['usuario_perfil'] === 'admin') {
+    // Admin pode editar qualquer notícia
+    $stmt = $pdo->prepare("SELECT * FROM noticias WHERE id = ?");
+    $stmt->execute([$id]);
+} else {
+    // Redator: precisa ser o autor E ter solicitação aprovada
+    $stmt = $pdo->prepare("
+        SELECT n.* FROM noticias n
+        JOIN solicitacoes s ON s.noticia_id = n.id
+        WHERE n.id = ? 
+          AND n.autor = ? 
+          AND s.tipo = 'editar' 
+          AND s.status = 'aprovada'
+        ORDER BY s.data_solicitacao DESC
+        LIMIT 1
+    ");
+    $stmt->execute([$id, $_SESSION['usuario_id']]);
+}
+
 $noticia = $stmt->fetch();
 
 if (!$noticia) {
-    echo "<p style='text-align:center; color:red;'>Notícia não encontrada ou acesso negado.</p>";
+    echo "<p style='text-align:center; color:red;'>Você não tem permissão para editar esta notícia ou ela ainda não foi aprovada.</p>";
     exit;
 }
 
@@ -67,6 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/headerAdmin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>

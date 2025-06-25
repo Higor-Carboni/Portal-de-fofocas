@@ -73,24 +73,6 @@ table.usuarios th {
   margin: 12px auto 0 auto;
 }
 
-/* .btn-cadastrar-usuario {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #3a4666;
-  color: white;
-  padding: 10px 16px;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  text-decoration: none;
-  transition: background 0.2s ease;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-.btn-cadastrar-usuario:hover {
-  background: #2c3550;
-} */
 
 .btn-cadastrar-usuario {
   display: inline-flex;

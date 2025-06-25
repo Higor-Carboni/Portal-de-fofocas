@@ -1,74 +1,79 @@
 <?php
-if (session_status() !== PHP_SESSION_ACTIVE) {
-    session_start();
-}
+if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 $paginaAtual = basename($_SERVER['PHP_SELF']);
+$exibeOffcanvas = ($paginaAtual !== 'index.php');
 ?>
+
+<!-- BOOTSTRAP CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- FONT AWESOME -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="header.css">
+<link rel="stylesheet" href="headerAdmin.css">
 
 <header class="topo">
   <div class="cabecalho-container">
-    <img src="img/logoFofoca500.png" alt="Logo" class="logo">
+    <a href="index.php">
+      <img src="img/logoFofoca500.png" alt="Logo" class="logo">
+    </a>
 
-    <?php if (isset($_SESSION['usuario_id']) && $_SESSION['usuario_perfil'] === 'admin'): ?>
-      <button id="menu-btn" class="menu-icon">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
+    <?php if ($exibeOffcanvas): ?>
+      <!-- BOTÃO MENU HAMBURGUER -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral"
+        aria-controls="menuLateral" aria-label="Abrir menu">
+        <i class="fas fa-bars" style="color:#3e4354; font-size:36px;"></i>
       </button>
-    <?php endif; ?>
 
-    <nav class="header-links" id="nav-links">
-      <?php if (isset($_SESSION['usuario_id'])): ?>
-        <span class="nome-usuario">
-          <i class="fas fa-user-circle"></i> <?= $_SESSION['usuario_nome'] ?>
-        </span>
-
-        <div class="menu-links-container">
-          <?php if ($_SESSION['usuario_perfil'] === 'admin'): ?>
-
-            <!-- 👑 Painel do Administrador com submenu -->
-            <div class="dropdown">
-              <a href="admin.php" class="link-header"><i class="fas fa-crown"></i> Painel do Administrador</a>
-              <div class="dropdown-content">
-                <a href="usuarios.php"><i class="fas fa-users"></i> Usuários</a>
-                <a href="painelSolicitacoes.php"><i class="fas fa-tasks"></i> Solicitações</a>
-              </div>
-            </div>
-
-            <!-- 📊 Dashboard -->
-            <a href="dashboard.php" class="link-header"><i class="fas fa-chart-line"></i> Dashboard</a>
-
-          <?php else: ?>
-            <a href="dashboard.php" class="link-header"><i class="fas fa-home"></i> Dashboard</a>
-            <a href="cadastroNoticia.php" class="link-header"><i class="fas fa-plus"></i> Nova Notícia</a>
-          <?php endif; ?>
-
-          <!-- 🔚 Sair -->
-          <a href="logout.php" class="link-header"><i class="fas fa-sign-out-alt"></i> Sair</a>
+      <!-- MENU OFFCANVAS -->
+      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="menuLateral" aria-labelledby="menuLateralLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="menuLateralLabel">Menu</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Fechar"></button>
         </div>
-      <?php elseif ($paginaAtual === 'index.php'): ?>
-        <a href="login.php" class="link-header"><i class="fas fa-sign-in-alt"></i> Login</a>
-      <?php endif; ?>
-    </nav>
+
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <?php if (isset($_SESSION['usuario_id'])): ?>
+              <li class="nav-item text-white mb-2">
+                <i class="fas fa-user-circle"></i> <?= $_SESSION['usuario_nome'] ?>
+              </li>
+
+              <?php if ($_SESSION['usuario_perfil'] === 'admin'): ?>
+                <li class="nav-item"><a class="nav-link text-white" href="dashboard.php"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle text-white" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-crown"></i> Administração
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-dark">
+                    <li><a class="dropdown-item" href="usuarios.php"><i class="fas fa-users"></i> Usuários</a></li>
+                    <li><a class="dropdown-item" href="painelSolicitacoes.php"><i class="fas fa-tasks"></i> Solicitações</a></li>
+                  </ul>
+                </li>
+              <?php else: ?>
+                <li class="nav-item"><a class="nav-link text-white" href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="cadastroNoticia.php"><i class="fas fa-plus"></i> Nova Notícia</a></li>
+              <?php endif; ?>
+
+              <li class="nav-item"><a class="nav-link text-danger" href="logout.php"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+            <?php endif; ?>
+          </ul>
+        </div>
+      </div>
+    <?php else: ?>
+      <!-- VISITANTE NA INDEX -->
+      <nav class="menu-superior">
+        <?php if (!isset($_SESSION['usuario_id'])): ?>
+          <a href="login.php" class="link-header"><i class="fas fa-sign-in-alt"></i> Login</a>
+        <?php else: ?>
+          <span class="nome-usuario">
+            <i class="fas fa-user-circle"></i> <?= $_SESSION['usuario_nome'] ?>
+          </span>
+          <a href="logout.php" class="link-header text-danger"><i class="fas fa-sign-out-alt"></i> Sair</a>
+        <?php endif; ?>
+      </nav>
+    <?php endif; ?>
   </div>
 </header>
 
-<!-- Script do menu responsivo -->
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const menuBtn = document.getElementById('menu-btn');
-    const navLinks = document.getElementById('nav-links');
-
-    if (menuBtn && navLinks) {
-      menuBtn.addEventListener('click', function () {
-        navLinks.classList.toggle('ativo');
-      });
-
-      document.addEventListener('click', function (e) {
-        if (!menuBtn.contains(e.target) && !navLinks.contains(e.target)) {
-          navLinks.classList.remove('ativo');
-        }
-      });
-    }
-  });
-</script>
+<!-- BOOTSTRAP JS (no final do body em arquivos que não usam include, ou pode ficar aqui para garantir funcionamento global) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>

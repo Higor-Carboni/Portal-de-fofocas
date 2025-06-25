@@ -28,7 +28,7 @@ if ($acao === 'aprovar') {
         $stmt = $pdo->prepare("DELETE FROM noticias WHERE id = ?");
         $stmt->execute([$solicitacao['noticia_id']]);
 
-        header("Location: painelSolicitacao.php?msg=excluida");
+        header("Location: painelSolicitacoes.php?msg=excluida");
         exit;
 
     } elseif ($solicitacao['tipo'] === 'editar') {
@@ -37,11 +37,18 @@ if ($acao === 'aprovar') {
         exit;
     }
 
+    elseif ($solicitacao['tipo'] === 'nova') {
+    // Aprovação de notícia recém-cadastrada
+    // Neste caso, nenhuma ação adicional é necessária além de marcar como aprovada
+    header("Location: painelSolicitacoes.php?msg=aprovada");
+    exit;
+}
+
 } elseif ($acao === 'rejeitar') {
     $stmt = $pdo->prepare("UPDATE solicitacoes SET status = 'rejeitada' WHERE id = ?");
     $stmt->execute([$id]);
 
-    header("Location: painelSolicitacao.php?msg=rejeitada");
+    header("Location: painelSolicitacoes.php?msg=rejeitada");
     exit;
 } else {
     die('Ação inválida.');

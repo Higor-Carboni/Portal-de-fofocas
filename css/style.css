@@ -1,5 +1,6 @@
 /* --------------------- BASE --------------------- */
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -20,7 +21,7 @@ html, body {
 
 /* --------------------- LOGIN --------------------- */
 .menu-link {
-  color: white; 
+  color: white;
   font-weight: 500;
   padding: 8px 14px;
   text-decoration: none;
@@ -34,7 +35,7 @@ html, body {
 
 .menu-link:hover {
   background: #3e4354; /* Fundo branco no hover */
-  color: #232b3f;       /* Texto escuro no hover */
+  color: #232b3f; /* Texto escuro no hover */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -106,7 +107,12 @@ html, body {
   bottom: 0;
   width: 100%;
   padding: 18px;
-  background: linear-gradient(0deg, #232b3f 92%, #232b3f99 100%, transparent 100%);
+  background: linear-gradient(
+    0deg,
+    #232b3f 92%,
+    #232b3f99 100%,
+    transparent 100%
+  );
   color: #fff;
   border-bottom-left-radius: 18px;
   border-bottom-right-radius: 18px;
@@ -404,15 +410,17 @@ form input[type="submit"]:hover {
   background: #3a4666;
 }
 
-
 /* === Estrutura principal do dashboard === */
 .conteudo-dashboard {
   padding: 24px;
   max-width: 1200px;
   margin: auto;
+  background: #f5f6fa;
+  min-height: calc(100vw - 140px); /* Ajuste para header + footer */
   display: flex;
   flex-direction: column;
   gap: 24px;
+  box-sizing: border-box;
 }
 
 /* Título principal */
@@ -433,7 +441,7 @@ form input[type="submit"]:hover {
   display: flex;
   justify-content: center;
   gap: 12px;
-  margin: 24px 0 12px 0; 
+  margin: 24px 0 12px 0;
   flex-wrap: wrap;
 }
 
@@ -448,7 +456,7 @@ form input[type="submit"]:hover {
   align-items: center;
   gap: 8px;
   text-decoration: none;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease-in-out;
 }
 
@@ -463,8 +471,8 @@ form input[type="submit"]:hover {
   justify-content: center;
   gap: 16px;
   flex-wrap: wrap;
-  max-width: 760px;   /* MESMA largura dos botões */
-  margin: 24px auto;  /* centraliza e espaça verticalmente */
+  max-width: 760px; /* MESMA largura dos botões */
+  margin: 24px auto; /* centraliza e espaça verticalmente */
 }
 
 .card-info-inline {
@@ -472,7 +480,7 @@ form input[type="submit"]:hover {
   background: #f5f7fb;
   padding: 12px 16px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   text-align: center;
 }
 
@@ -489,25 +497,56 @@ form input[type="submit"]:hover {
   margin: 4px 0 0;
 }
 
-/* Seção de gráficos */
+.area-graficos {
+  background: #f5f6fa; /* ou a cor de fundo que preferir */
+  width: 100vw;
+  min-height: calc(100vh - 140px); /* ajuste 140px p/ header+footer */
+  padding: 40px 0;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  box-sizing: border-box;
+}
+
 .graficos-dashboard {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 24px;
+  align-items: center;
+  width: 100%;
 }
 
 .grafico-box {
   background: white;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  width: 500px; 
-  max-width: 90vw;
-  margin: auto;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 650px; /* aumenta a largura máxima dos gráficos */
+  min-width: 260px; /* garante que não fique muito estreito */
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .grafico-box h3 {
   color: #232b3f;
   margin-bottom: 12px;
+}
+
+.grafico-box canvas {
+  width: 100% !important;
+  height: 240px !important; /* Ajuste aqui se quiser mais alto/baixo */
+  max-width: 100%;
+  display: block;
+}
+
+@media (max-width: 800px) {
+  .grafico-box {
+    max-width: 98vw;
+    padding: 12px;
+  }
+  .area-graficos {
+    padding: 16px 0;
+  }
 }
 
 /* Tabela de notícias pessoais */
@@ -519,7 +558,7 @@ form input[type="submit"]:hover {
   width: 100%;
   border-collapse: collapse;
   background: white;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .tabela-noticias th,
@@ -557,9 +596,7 @@ form input[type="submit"]:hover {
   background: #cc2e2e;
 }
 
-
-Botão voltar
-.btn-voltar {
+Botão voltar .btn-voltar {
   background: #3a4666;
   color: white;
   padding: 10px 16px;
@@ -601,7 +638,7 @@ Botão voltar
   height: 48px;
   font-size: 22px;
   display: none;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   cursor: pointer;
 }
 /* Adicionar Notícias ADMIN */
@@ -616,7 +653,7 @@ Botão voltar
   font-weight: 500;
   text-decoration: none;
   font-size: 0.95rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   transition: background 0.2s ease;
 }
 
@@ -651,9 +688,8 @@ Botão voltar
     flex-direction: column;
   }
 
-  .tabela-noticias th, .tabela-noticias td {
+  .tabela-noticias th,
+  .tabela-noticias td {
     font-size: 0.9rem;
   }
 }
-
-

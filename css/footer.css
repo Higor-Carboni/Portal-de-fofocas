@@ -12,14 +12,14 @@ footer .redes {
 }
 
 footer .redes a {
-  color: #fff;
+  color: #ffffffcc;
   margin: 0 8px;
   font-size: 1.3em;
   transition: color 0.15s;
 }
 
 footer .redes a:hover {
-  color: #ffb300;
+  color: #2c0aa5;
 }
 
 #topo {

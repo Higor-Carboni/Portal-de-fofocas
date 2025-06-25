@@ -4,3 +4,6 @@ function resumo($texto, $limite = 100) {
 }
 ?> -->
 
+
+
+

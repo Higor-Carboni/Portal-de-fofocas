@@ -29,17 +29,11 @@ $titulo = "Painel do Administrador";
     <div class="conteudo-page">
         <?php include 'includes/header.php'; ?>
 
-        <main class="conteudo" style="flex-direction: column; align-items: center;">
-            <h2 style="color: #232b3f;">👑 <?= $titulo ?></h2>
-            <p style="margin-bottom: 24px;">
+        <main class="conteudo-admin">
+            <h2>👑 <?= $titulo ?></h2>
+            <p>
                 Bem-vindo, <strong><?= $_SESSION['usuario_nome'] ?></strong>! Acesse abaixo as áreas administrativas.
             </p>
-
-            <div style="display: flex; gap: 24px; margin-top: 24px;">
-                <a href="dashboard.php" class="link-header"><i class="fas fa-chart-line"></i> Dashboard</a>
-                <a href="usuarios.php" class="link-header"><i class="fas fa-users"></i> Usuários</a>
-                <a href="painelSolicitacoes.php" class="link-header"><i class="fas fa-tasks"></i> Solicitações</a>
-            </div>
         </main>
 
         <?php include 'includes/footer.php'; ?>

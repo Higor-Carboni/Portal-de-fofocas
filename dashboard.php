@@ -172,9 +172,7 @@ $usuarios = $pdo->query("SELECT u.nome, COUNT(n.id) AS total FROM usuarios u LEF
                         <tr>
                             <th>Autor</th>
                             <th>Título</th>
-                            <th>Resumo</th>
                             <th>Data</th>
-                            <th>Imagem</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
@@ -183,13 +181,7 @@ $usuarios = $pdo->query("SELECT u.nome, COUNT(n.id) AS total FROM usuarios u LEF
                             <tr>
                                 <td><?= htmlspecialchars($n['autor_nome']) ?></td>
                                 <td><?= htmlspecialchars($n['titulo']) ?></td>
-                                <td><?= substr(strip_tags($n['noticia']), 0, 30) ?>...</td>
                                 <td><?= date('d/m/Y H:i', strtotime($n['data'])) ?></td>
-                                <td>
-                                    <?php if ($n['imagem']): ?>
-                                        <img src="<?= htmlspecialchars($n['imagem']) ?>" alt="imagem">
-                                    <?php endif; ?>
-                                </td>
                                 <td>
                                     <?php if ($_SESSION['usuario_perfil'] === 'admin'): ?>
                                         <a href="alterarNoticia.php?id=<?= $n['id'] ?>" class="btn-editar" title="Editar">
@@ -223,7 +215,7 @@ $usuarios = $pdo->query("SELECT u.nome, COUNT(n.id) AS total FROM usuarios u LEF
                 </a>
             </div>
             <div class="form-botoes">
-                <button onclick="window.location.href='dashboard.php'">Voltar</button>
+                <button onclick="window.location.href='index.php'">Voltar</button>
             </div>
         </main>
 
@@ -304,6 +296,7 @@ $usuarios = $pdo->query("SELECT u.nome, COUNT(n.id) AS total FROM usuarios u LEF
             btn.style.display = window.scrollY > 300 ? 'block' : 'none';
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

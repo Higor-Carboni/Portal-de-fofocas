@@ -412,7 +412,7 @@ form input[type="submit"]:hover {
 
 /* === Estrutura principal do dashboard === */
 .conteudo-dashboard {
-  padding: 24px;
+  padding: 0;
   max-width: 1200px;
   margin: auto;
   background: #f5f6fa;
@@ -552,6 +552,7 @@ form input[type="submit"]:hover {
 /* Tabela de notícias pessoais */
 #suas-noticias-container {
   margin-top: 24px;
+  
 }
 
 .tabela-noticias {
@@ -559,6 +560,7 @@ form input[type="submit"]:hover {
   border-collapse: collapse;
   background: white;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  margin: 0 auto;
 }
 
 .tabela-noticias th,

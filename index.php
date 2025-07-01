@@ -7,14 +7,23 @@ session_start();
 $categorias = $pdo->query("SELECT id, nome FROM categorias ORDER BY nome")->fetchAll(PDO::FETCH_ASSOC);
 
 $categoria_id = $_GET['categoria'] ?? '';
+$pesquisa = trim($_GET['pesquisa'] ?? '');
 $params = [];
 $sql = "SELECT noticias.*, usuarios.nome AS autor_nome, categorias.nome AS categoria_nome
         FROM noticias 
         JOIN usuarios ON noticias.autor = usuarios.id
         JOIN categorias ON noticias.categoria_id = categorias.id";
+$where = [];
 if ($categoria_id && ctype_digit($categoria_id)) {
-    $sql .= " WHERE noticias.categoria_id = ?";
+    $where[] = "noticias.categoria_id = ?";
     $params[] = $categoria_id;
+}
+if ($pesquisa !== '') {
+    $where[] = "noticias.titulo LIKE ?";
+    $params[] = '%' . $pesquisa . '%';
+}
+if ($where) {
+    $sql .= " WHERE " . implode(' AND ', $where);
 }
 $sql .= " ORDER BY data DESC";
 $stmt = $pdo->prepare($sql);
@@ -51,6 +60,10 @@ $noticias = $stmt->fetchAll();
             <?php endforeach; ?>
         </div>
 
+        <div class="pesquisa-centralizada">
+            <input type="text" id="pesquisa-titulo" name="pesquisa" placeholder="Pesquisar por título..." value="<?= htmlspecialchars($_GET['pesquisa'] ?? '') ?>">
+        </div>
+
         <?php if ($noticias): ?>
             <div class="grade-cards">
                 <?php foreach ($noticias as $n): ?>
@@ -75,7 +88,23 @@ $noticias = $stmt->fetchAll();
 
 <?php include 'includes/footer.php'; ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const input = document.getElementById('pesquisa-titulo');
+    const cards = document.querySelectorAll('.card-noticia');
 
-
+    input.addEventListener('input', function() {
+        const termo = input.value.trim().toLowerCase();
+        cards.forEach(card => {
+            const titulo = card.querySelector('h2').textContent.toLowerCase();
+            if (titulo.includes(termo)) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+});
+</script>
 </body>
 </html>

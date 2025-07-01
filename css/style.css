@@ -47,7 +47,7 @@ body {
   gap: 10px;
   margin: 24px auto 10px auto;
   padding: 0 24px;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .filtros-categorias button {
@@ -839,4 +839,36 @@ body.dark-mode .form-botoes button,
 body.dark-mode .btn-cadastrar-noticia {
     background: #232b3f !important;
     color: #fff !important;
+}
+
+/* --------------------- PESQUISA --------------------- */
+.form-pesquisa-titulo {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 24px 0 0 0;
+}
+.form-pesquisa-titulo input[type="text"] {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    min-width: 220px;
+}
+
+
+.pesquisa-centralizada {
+    display: flex;
+    justify-content: center;
+    margin: 24px 0 10px 0;
+    margin-bottom: 18px;
+}
+
+.pesquisa-centralizada input[type="text"] {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    min-width: 220px;
+    font-size: 1em;
+    background: #f7f9fc;
+    box-shadow: none;
 }

@@ -47,6 +47,7 @@ body {
   gap: 10px;
   margin: 24px auto 10px auto;
   padding: 0 24px;
+  margin-bottom: 1rem;
 }
 
 .filtros-categorias button {
@@ -694,4 +695,180 @@ Botão voltar .btn-voltar {
   .tabela-noticias td {
     font-size: 0.9rem;
   }
+}
+
+/* --- DARK MODE --- */
+body.dark-mode,
+body.dark-mode .conteudo-page {
+  background: #181a1b !important;
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .card-noticia,
+body.dark-mode form,
+body.dark-mode .form-box-noticia,
+body.dark-mode .grafico-box,
+body.dark-mode .tabela-noticias,
+body.dark-mode .form-box,
+body.dark-mode .admin-links a,
+body.dark-mode .dropdown-content,
+body.dark-mode .tabela-container,
+body.dark-mode .tabela-noticias th,
+body.dark-mode .tabela-noticias td {
+  background: #23272b !important;
+  color: #e0e0e0 !important;
+  box-shadow: 0 2px 12px #0008;
+}
+
+body.dark-mode .card-noticia .texto {
+  background: linear-gradient(0deg, #181a1b 92%, #23272b99 100%, transparent 100%);
+}
+
+body.dark-mode .filtros-categorias button,
+body.dark-mode .form-botoes button,
+body.dark-mode .btn-cadastrar-noticia,
+body.dark-mode .user-inline-menu a,
+body.dark-mode .btn-voltar,
+body.dark-mode .btn-cancelar,
+body.dark-mode .botoes-navegacao a {
+  background: #232b3f !important;
+  color: #fff !important;
+}
+
+body.dark-mode .filtros-categorias button:hover,
+body.dark-mode .form-botoes button:hover,
+body.dark-mode .btn-cadastrar-noticia:hover,
+body.dark-mode .user-inline-menu a:hover,
+body.dark-mode .btn-voltar:hover,
+body.dark-mode .btn-cancelar:hover,
+body.dark-mode .botoes-navegacao a:hover {
+  background: #3a4666 !important;
+}
+
+body.dark-mode .msg-erro {
+  background: #3a1a1a !important;
+  color: #ffb3b3 !important;
+  border-color: #c62828 !important;
+}
+
+body.dark-mode .msg-sucesso {
+  background: #1b3a1a !important;
+  color: #b3ffb3 !important;
+  border-color: #388e3c !important;
+}
+
+body.dark-mode .topo,
+body.dark-mode footer,
+body.dark-mode .dropdown-content {
+  background: #181a1b !important;
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .menu-superior a,
+body.dark-mode .menu-superior span,
+body.dark-mode .admin-links a,
+body.dark-mode .link-header,
+body.dark-mode .nome-usuario,
+body.dark-mode .sair-link {
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .menu-superior a:hover,
+body.dark-mode .admin-links a:hover,
+body.dark-mode .link-header:hover,
+body.dark-mode .sair-link:hover {
+  background: #232b3f !important;
+  color: #fff !important;
+}
+
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+  background: #23272b !important;
+  color: #e0e0e0 !important;
+  border-color: #444 !important;
+}
+
+body.dark-mode .sem-noticia {
+  color: #aaa !important;
+}
+
+body.dark-mode #topo {
+  background: #232b3f !important;
+  color: #fff !important;
+}
+
+body.dark-mode .btn-editar { background: #2979cc !important; }
+body.dark-mode .btn-excluir { background: #cc2e2e !important; }
+body.dark-mode .btn-promover { background: #27ae60 !important; }
+body.dark-mode .btn-rebaixar { background: #f39c12 !important; }
+/* --- DARK MODE: Dashboard --- */
+body.dark-mode .wrapper,
+body.dark-mode .conteudo-dashboard,
+body.dark-mode .area-graficos,
+body.dark-mode .grafico-box,
+body.dark-mode .cards-info-inline,
+body.dark-mode .card-info-inline {
+    background: #181a1b !important;
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .grafico-box,
+body.dark-mode .card-info-inline {
+    box-shadow: 0 2px 12px #0008 !important;
+    border-color: #232b3f !important;
+}
+
+body.dark-mode .tabela-noticias,
+body.dark-mode .tabela-noticias th,
+body.dark-mode .tabela-noticias td {
+    background: #23272b !important;
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .botoes-navegacao a {
+    background: #232b3f !important;
+    color: #fff !important;
+}
+
+body.dark-mode .botoes-navegacao a:hover {
+    background: #3a4666 !important;
+}
+
+body.dark-mode .form-botoes button,
+body.dark-mode .btn-cadastrar-noticia {
+    background: #232b3f !important;
+    color: #fff !important;
+}
+
+/* --------------------- PESQUISA --------------------- */
+.form-pesquisa-titulo {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 24px 0 0 0;
+}
+.form-pesquisa-titulo input[type="text"] {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    min-width: 220px;
+}
+
+
+.pesquisa-centralizada {
+    display: flex;
+    justify-content: center;
+    margin: 24px 0 10px 0;
+    margin-bottom: 18px;
+}
+
+.pesquisa-centralizada input[type="text"] {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    min-width: 220px;
+    font-size: 1em;
+    background: #f7f9fc;
+    box-shadow: none;
 }

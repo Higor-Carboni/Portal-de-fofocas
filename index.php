@@ -29,6 +29,9 @@ $sql .= " ORDER BY data DESC";
 $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
 $noticias = $stmt->fetchAll();
+
+// Buscar anúncio em destaque ou o mais recente ativo
+$anuncio_destaque = $pdo->query("SELECT * FROM anuncio WHERE ativo = 1 ORDER BY destaque DESC, id DESC LIMIT 1")->fetch(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -50,6 +53,15 @@ $noticias = $stmt->fetchAll();
     <?php include 'includes/header.php'; ?>
 
     <main class="conteudo">
+
+        <?php if ($anuncio_destaque): ?>
+        <div class="anuncio destaque-fixo" style="margin: 0 auto 24px auto; max-width: 380px;">
+            <a href="<?= htmlspecialchars($anuncio_destaque['link']) ?>" target="_blank" rel="noopener">
+                <img src="<?= htmlspecialchars($anuncio_destaque['imagem']) ?>" alt="<?= htmlspecialchars($anuncio_destaque['nome']) ?>" style="max-width:220px;max-height:80px;display:block;margin:auto;">
+                <div class="anuncio-texto"><?= htmlspecialchars($anuncio_destaque['texto']) ?></div>
+            </a>
+        </div>
+        <?php endif; ?>
 
         <div class="filtros-categorias">
             <button onclick="window.location.href='index.php'">Todas</button>
@@ -82,6 +94,8 @@ $noticias = $stmt->fetchAll();
             <p class="sem-noticia">😢 Nenhuma fofoca publicada ainda.</p>
         <?php endif; ?>
 
+        <div id="anuncios"></div>
+
     </main>
 
 </div>
@@ -105,6 +119,49 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+function renderAnuncios(anuncios) {
+    const container = document.getElementById('anuncios');
+    if (!container) return;
+    container.innerHTML = '';
+    anuncios.forEach(anuncio => {
+        if (!anuncio.ativo) return;
+        const destaque = anuncio.destaque ? 'anuncio-destaque' : '';
+        container.innerHTML += `
+            <div class="anuncio ${destaque}">
+                <a href="${anuncio.link}" target="_blank" rel="noopener">
+                    <img src="${anuncio.imagem}" alt="${anuncio.nome}" style="max-width:220px;max-height:80px;display:block;margin:auto;">
+                    <div class="anuncio-texto">${anuncio.texto}</div>
+                </a>
+            </div>
+        `;
+    });
+}
+fetch('anuncios.json.php')
+    .then(r => r.json())
+    .then(anuncios => {
+        const ativos = anuncios.filter(a => a.ativo);
+        if (ativos.length === 0) return;
+        const sorteado = ativos[Math.floor(Math.random() * ativos.length)];
+        setTimeout(() => {
+            const modal = document.createElement('div');
+            modal.style.position = 'fixed';
+            modal.style.top = '0'; modal.style.left = '0';
+            modal.style.width = '100vw'; modal.style.height = '100vh';
+            modal.style.background = 'rgba(0,0,0,0.5)';
+            modal.style.display = 'flex'; modal.style.alignItems = 'center'; modal.style.justifyContent = 'center';
+            modal.innerHTML = `
+                <div style="background:#fff;padding:24px 32px;border-radius:12px;max-width:350px;text-align:center;position:relative;">
+                    <button style="position:absolute;top:8px;right:12px;font-size:18px;background:none;border:none;cursor:pointer;" onclick="this.closest('div').parentNode.remove()">×</button>
+                    <a href="${sorteado.link}" target="_blank" rel="noopener">
+                        <img src="${sorteado.imagem}" alt="${sorteado.nome}" style="max-width:220px;max-height:80px;display:block;margin:auto;">
+                        <div class="anuncio-texto">${sorteado.texto}</div>
+                    </a>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }, 2000);
+    });
 </script>
 </body>
 </html>

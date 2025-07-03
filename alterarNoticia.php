@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $imagem = $_FILES['imagem'] ?? null;
 
     if (empty($titulo) || empty($texto) || empty($categoria_id)) {
-        $mensagem = 'Preencha todos os campos obrigatórios.';
+        $mensagem = 'Pzreencha todos os campos obrigatórios.';
     } else {
         $imagem_nome = $imagem_atual;
 
@@ -87,6 +87,173 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/headerAdmin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* =================== ANUNCIO - PADRÃO INDEX =================== */
+
+        .anuncio-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin: 24px 0 10px 0;
+          padding: 0 12px;
+        }
+
+        .anuncio-header h2 {
+          font-size: 2rem;
+          color: #232b3f;
+          font-weight: 700;
+          margin: 0;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .anuncio-header .btn-cadastrar-noticia {
+          background: #b51717;
+          color: #fff;
+          padding: 10px 16px;
+          border-radius: 6px;
+          font-weight: 500;
+          text-decoration: none;
+          font-size: 0.95rem;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+          transition: background 0.2s ease;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .anuncio-header .btn-cadastrar-noticia:hover {
+          background: #3f4557;
+        }
+
+        .grade-cards-anuncio {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 32px;
+          justify-content: center;
+          margin-top: 10px;
+        }
+
+        .card-anuncio {
+          background: #fff;
+          border-radius: 18px;
+          box-shadow: 0 6px 24px #0002;
+          overflow: hidden;
+          width: 340px;
+          min-height: 340px;
+          display: flex;
+          flex-direction: column;
+          transition: transform 0.18s, box-shadow 0.18s;
+          position: relative;
+          align-items: center;
+        }
+
+        .card-anuncio:hover {
+          transform: translateY(-6px) scale(1.03);
+          box-shadow: 0 12px 32px #0003;
+        }
+
+        .card-anuncio img {
+          width: 100%;
+          height: 180px;
+          object-fit: contain;
+          display: block;
+          background: #f7f7f7;
+          border-top-left-radius: 18px;
+          border-top-right-radius: 18px;
+        }
+
+        .card-anuncio .texto {
+          width: 100%;
+          padding: 18px;
+          background: linear-gradient(0deg, #232b3f 92%, #232b3f99 100%, transparent 100%);
+          color: #fff;
+          border-bottom-left-radius: 18px;
+          border-bottom-right-radius: 18px;
+          min-height: 120px;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .card-anuncio h3 {
+          margin: 0 0 6px 0;
+          font-size: 1.18em;
+          font-weight: bold;
+          color: #fff;
+          text-shadow: 0 2px 8px #000a;
+        }
+
+        .card-anuncio p {
+          margin: 0;
+          font-size: 1em;
+          color: #e0e0e0;
+          text-shadow: 0 2px 8px #000a;
+        }
+
+        .card-anuncio .info-extra {
+          font-size: 0.98em;
+          color: #ffe082;
+          margin-bottom: 4px;
+        }
+
+        .card-anuncio .acoes {
+          display: flex;
+          gap: 10px;
+          margin-top: 10px;
+        }
+
+        .card-anuncio .btn-editar,
+        .card-anuncio .btn-excluir {
+          padding: 6px 10px;
+          border-radius: 6px;
+          font-size: 1rem;
+          margin: 0 2px;
+          display: inline-block;
+          text-decoration: none;
+          color: #fff;
+          background: #3a4666;
+          transition: background 0.2s;
+        }
+
+        .card-anuncio .btn-editar:hover {
+          background: #2979cc;
+        }
+
+        .card-anuncio .btn-excluir {
+          background: #b51717;
+        }
+
+        .card-anuncio .btn-excluir:hover {
+          background: #cc2e2e;
+        }
+
+        @media (max-width: 1100px) {
+          .card-anuncio {
+            width: 46vw;
+            min-width: 260px;
+            max-width: 98vw;
+          }
+        }
+
+        @media (max-width: 700px) {
+          .grade-cards-anuncio {
+            flex-direction: column;
+            align-items: center;
+          }
+          .card-anuncio {
+            width: 98vw;
+            border-radius: 12px;
+          }
+          .card-anuncio img {
+            border-radius: 12px 12px 0 0;
+          }
+          .card-anuncio .texto {
+            border-radius: 0 0 12px 12px;
+          }
+        }
+    </style>
 </head>
 <body>
 <div class="conteudo-page">

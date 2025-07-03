@@ -4,17 +4,17 @@ $paginaAtual = basename($_SERVER['PHP_SELF']);
 $exibeOffcanvas = isset($_SESSION['usuario_id']);
 ?>
 
-<!-- BOOTSTRAP CSS -->
+<!-- CSS já carregado nas páginas principais -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- FONT AWESOME -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link rel="stylesheet" href="header.css">
-<link rel="stylesheet" href="headerAdmin.css">
+<link rel="stylesheet" href="../css/header.css">
+<link rel="stylesheet" href="../css/headerAdmin.css">
+<link rel="stylesheet" href="../css/footer.css">
 
 <header class="topo">
   <div class="cabecalho-container">
-    <a href="index.php">
-      <img src="img/logoFofoca500.png" alt="Logo" class="logo">
+    <a href="../index.php">
+      <img src="../img/logoFofoca500.png" alt="Logo" class="logo">
     </a>
 
     <?php if ($exibeOffcanvas): ?>
@@ -40,7 +40,7 @@ $exibeOffcanvas = isset($_SESSION['usuario_id']);
 
               <?php if ($_SESSION['usuario_perfil'] === 'admin'): ?>
                 <li class="nav-item">
-                  <a class="nav-link text-white" href="dashboard.php">
+                  <a class="nav-link text-white" href="../dashboard.php">
                     <i class="fas fa-chart-line"></i> Dashboard
                   </a>
                 </li>
@@ -51,18 +51,18 @@ $exibeOffcanvas = isset($_SESSION['usuario_id']);
                     <i class="fas fa-crown"></i> Administração
                   </a>
                   <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="adminDropdown">
-                    <li><a class="dropdown-item" href="usuarios.php"><i class="fas fa-users"></i> Usuários</a></li>
-                    <li><a class="dropdown-item" href="painelSolicitacoes.php"><i class="fas fa-tasks"></i> Solicitações</a></li>
-                    <li><a class="dropdown-item" href="anuncios/anuncio.php"><i class="fas fa-bullhorn"></i> Anúncios</a></li>
+                    <li><a class="dropdown-item" href="../usuarios.php"><i class="fas fa-users"></i> Usuários</a></li>
+                    <li><a class="dropdown-item" href="../painelSolicitacoes.php"><i class="fas fa-tasks"></i> Solicitações</a></li>
+                    <li><a class="dropdown-item" href="anuncio.php"><i class="fas fa-bullhorn"></i> Anúncios</a></li>
                   </ul>
                 </li>
               <?php else: ?>
-                <li class="nav-item"><a class="nav-link text-white" href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="cadastroNoticia.php"><i class="fas fa-plus"></i> Nova Notícia</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="../dashboard.php"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="../cadastroNoticia.php"><i class="fas fa-plus"></i> Nova Notícia</a></li>
               <?php endif; ?>
 
               <li class="nav-item">
-                <a class="nav-link text-danger" href="logout.php"><i class="fas fa-sign-out-alt"></i> Sair</a>
+                <a class="nav-link text-danger" href="../logout.php"><i class="fas fa-sign-out-alt"></i> Sair</a>
               </li>
 
               <!-- ABA ACESSIBILIDADE COMO DROPDOWN -->
@@ -87,12 +87,12 @@ $exibeOffcanvas = isset($_SESSION['usuario_id']);
       <!-- VISITANTE -->
       <nav class="menu-superior">
         <?php if (!isset($_SESSION['usuario_id'])): ?>
-          <a href="login.php" class="link-header"><i class="fas fa-sign-in-alt"></i> Login</a>
+          <a href="../login.php" class="link-header"><i class="fas fa-sign-in-alt"></i> Login</a>
         <?php else: ?>
           <span class="nome-usuario">
             <i class="fas fa-user-circle"></i> <?= $_SESSION['usuario_nome'] ?>
           </span>
-          <a href="logout.php" class="link-header text-danger"><i class="fas fa-sign-out-alt"></i> Sair</a>
+          <a href="../logout.php" class="link-header text-danger"><i class="fas fa-sign-out-alt"></i> Sair</a>
         <?php endif; ?>
       </nav>
     <?php endif; ?>
@@ -134,4 +134,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-</script>
+</script> 

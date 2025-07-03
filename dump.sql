@@ -36,3 +36,16 @@ INSERT INTO categorias (nome) VALUES
 ('TV'),
 ('Política'),
 ('Curiosidades');
+
+CREATE TABLE IF NOT EXISTS anuncio (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    imagem VARCHAR(255),
+    link VARCHAR(255),
+    texto VARCHAR(255),
+    ativo BOOLEAN DEFAULT 1,
+    destaque BOOLEAN DEFAULT 0,
+    data_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP,
+    valorAnuncio DECIMAL(10,2) DEFAULT 0.00
+);
+T7

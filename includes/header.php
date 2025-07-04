@@ -52,6 +52,7 @@ $exibeOffcanvas = isset($_SESSION['usuario_id']);
                   </a>
                   <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="adminDropdown">
                     <li><a class="dropdown-item" href="usuarios.php"><i class="fas fa-users"></i> Usuários</a></li>
+                    <li><a class="dropdown-item" href="anuncios.php"><i class="fas fa-ad"></i> Anúncios</a></li>
                     <li><a class="dropdown-item" href="painelSolicitacoes.php"><i class="fas fa-tasks"></i> Solicitações</a></li>
                   </ul>
                 </li>

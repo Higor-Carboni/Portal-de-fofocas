@@ -30,9 +30,28 @@ CREATE TABLE IF NOT EXISTS noticias (
     FOREIGN KEY (categoria_id) REFERENCES categorias(id)
 );
 
+-- Tabela de Anúncios
+CREATE TABLE IF NOT EXISTS anuncios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL COMMENT 'Nome da empresa ou anunciante',
+    imagem VARCHAR(500) NOT NULL COMMENT 'Caminho da imagem/banner',
+    link VARCHAR(500) NOT NULL COMMENT 'URL de destino (ex: site, promoção)',
+    texto VARCHAR(255) NOT NULL COMMENT 'Mensagem ou slogan',
+    ativo BOOLEAN DEFAULT TRUE COMMENT 'Controla se o anúncio deve ou não aparecer',
+    destaque BOOLEAN DEFAULT FALSE COMMENT 'Se verdadeiro, o anúncio aparece com destaque',
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Data de inclusão no sistema',
+    valorAnuncio DECIMAL(10,2) DEFAULT 0.00 COMMENT 'Valor cobrado pelo anuncio'
+);
+
 -- Inserir categorias padrão
 INSERT INTO categorias (nome) VALUES 
 ('Famosos'),
 ('TV'),
 ('Política'),
 ('Curiosidades');
+
+-- Inserir alguns anúncios de exemplo
+INSERT INTO anuncios (nome, imagem, link, texto, ativo, destaque, valorAnuncio) VALUES
+('Empresa ABC', 'img/anuncio1.jpg', 'https://www.empresaabc.com', 'Os melhores produtos para você!', TRUE, TRUE, 150.00),
+('Loja XYZ', 'img/anuncio2.jpg', 'https://www.lojaxyz.com', 'Promoções imperdíveis!', TRUE, FALSE, 100.00),
+('Restaurante Delícias', 'img/anuncio3.jpg', 'https://www.restaurantedelicias.com', 'A melhor comida da cidade!', TRUE, TRUE, 200.00);

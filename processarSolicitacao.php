@@ -28,7 +28,27 @@ if ($acao === 'aprovar') {
         $stmt = $pdo->prepare("DELETE FROM noticias WHERE id = ?");
         $stmt->execute([$solicitacao['noticia_id']]);
 
-        header("Location: painelSolicitacoes.php?msg=excluida");
+        echo "<!DOCTYPE html>
+        <html lang='pt-br'>
+        <head>
+            <meta charset='UTF-8'>
+            <title>Sucesso</title>
+            <link rel='stylesheet' href='css/style.css'>
+            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+        </head>
+        <body>
+            <script>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Notícia Excluída!',
+                    text: 'A notícia foi excluída com sucesso.',
+                    confirmButtonText: 'Voltar ao Painel'
+                }).then(() => {
+                    window.location.href = 'painelSolicitacoes.php';
+                });
+            </script>
+        </body>
+        </html>";
         exit;
 
     } elseif ($solicitacao['tipo'] === 'editar') {
@@ -38,18 +58,78 @@ if ($acao === 'aprovar') {
     }
 
     elseif ($solicitacao['tipo'] === 'nova') {
-    // Aprovação de notícia recém-cadastrada
-    // Neste caso, nenhuma ação adicional é necessária além de marcar como aprovada
-    header("Location: painelSolicitacoes.php?msg=aprovada");
-    exit;
-}
+        // Aprovação de notícia recém-cadastrada
+        echo "<!DOCTYPE html>
+        <html lang='pt-br'>
+        <head>
+            <meta charset='UTF-8'>
+            <title>Sucesso</title>
+            <link rel='stylesheet' href='css/style.css'>
+            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+        </head>
+        <body>
+            <script>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Notícia Aprovada!',
+                    text: 'A notícia foi aprovada com sucesso.',
+                    confirmButtonText: 'Voltar ao Painel'
+                }).then(() => {
+                    window.location.href = 'painelSolicitacoes.php';
+                });
+            </script>
+        </body>
+        </html>";
+        exit;
+    }
 
 } elseif ($acao === 'rejeitar') {
     $stmt = $pdo->prepare("UPDATE solicitacoes SET status = 'rejeitada' WHERE id = ?");
     $stmt->execute([$id]);
 
-    header("Location: painelSolicitacoes.php?msg=rejeitada");
+    echo "<!DOCTYPE html>
+    <html lang='pt-br'>
+    <head>
+        <meta charset='UTF-8'>
+        <title>Sucesso</title>
+        <link rel='stylesheet' href='css/style.css'>
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+    </head>
+    <body>
+        <script>
+            Swal.fire({
+                icon: 'info',
+                title: 'Solicitação Rejeitada',
+                text: 'A solicitação foi rejeitada com sucesso.',
+                confirmButtonText: 'Voltar ao Painel'
+            }).then(() => {
+                window.location.href = 'painelSolicitacoes.php';
+            });
+        </script>
+    </body>
+    </html>";
     exit;
 } else {
-    die('Ação inválida.');
+    echo "<!DOCTYPE html>
+    <html lang='pt-br'>
+    <head>
+        <meta charset='UTF-8'>
+        <title>Erro</title>
+        <link rel='stylesheet' href='css/style.css'>
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+    </head>
+    <body>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Ação Inválida',
+                text: 'A ação solicitada não é válida.',
+                confirmButtonText: 'Voltar ao Painel'
+            }).then(() => {
+                window.location.href = 'painelSolicitacoes.php';
+            });
+        </script>
+    </body>
+    </html>";
+    exit;
 }

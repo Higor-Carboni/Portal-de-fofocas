@@ -18,6 +18,31 @@
   width: 100vw;
 }
 
+.titulo-portal {
+    color: #fff;
+    font-size: 2.4em;
+    font-weight: bold;
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* Para telas menores que 600px (celular) */
+@media (max-width: 600px) {
+    .titulo-portal {
+        font-size: 1.4em;
+        text-align: center;
+        margin: 0 auto;
+        width: 100%;
+        display: block;
+    }
+}
+
+@media (max-width: 600px) {
+  .titulo-portal {
+    display: none !important;
+  }
+}
+
 /* Container interno do header */
 .cabecalho-container {
   width: 100%;
@@ -30,7 +55,7 @@
 
 /* Logo */
 .logo {
-  height: 56px;    /* Ajuste a gosto. Recomendo bem menor que 190px */
+  height: 100px;   
   width: auto;
   display: block;
   margin-right: 8px;
@@ -61,21 +86,7 @@
   align-items: center;
   gap: 24px;
 }
-.admin-links {
-  display: flex;
-  gap: 16px;
-}
-.admin-links a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  padding: 6px 10px;
-  border-radius: 4px;
-  transition: background 0.3s;
-}
-.admin-links a:hover {
-  background-color: #3a4666;
-}
+
 .menu-toggle {
   display: none;
   background: none;
@@ -151,11 +162,7 @@
   line-height: 1;
   color: #fff;
 }
-#weather-widget .weather-desc {
-  font-size: 14px;
-  line-height: 1;
-  color: #fff;
-}
+
 #weather-widget .weather-city {
   font-size: 12px;
   line-height: 1;
@@ -174,7 +181,7 @@
     gap: 8px;
   }
   .logo {
-    height: 28px;
+    height: 44px;
     margin-right: 6px;
   }
   #weather-widget {
@@ -192,3 +199,4 @@
     display: none; /* Mostra só temperatura e ícone no mobile! */
   }
 }
+

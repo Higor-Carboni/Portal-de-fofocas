@@ -53,6 +53,11 @@ $usuarios = $stmt->fetchAll();
             <section style="width: 100%;">
                 <h2 class="titulo-pagina">👥 Usuários Cadastrados</h2>
                 <div class="tabela-container">
+                    <div class="form-botoes">
+                        <button id="btnExportPdf" type="button">
+                            <i class="fas fa-file-pdf"></i> Exportar em PDF
+                        </button>
+                    </div>
                     <table class="usuarios">
                         <thead>
                             <tr>

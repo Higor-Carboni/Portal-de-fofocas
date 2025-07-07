@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($imagem && $imagem['error'] === UPLOAD_ERR_OK) {
             $ext = strtolower(pathinfo($imagem['name'], PATHINFO_EXTENSION));
-            $permitidas = ['jpg', 'jpeg', 'png', 'gif'];
+            $permitidas = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
             if (in_array($ext, $permitidas)) {
                 $imagem_nome = 'img/' . uniqid('img_') . '.' . $ext;
                 move_uploaded_file($imagem['tmp_name'], $imagem_nome);

@@ -90,6 +90,7 @@ $exibeOffcanvas = isset($_SESSION['usuario_id']);
                   </a>
                   <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="adminDropdown" tabindex="0">
                     <li><a class="dropdown-item" href="usuarios.php"><i class="fas fa-users"></i> Usuários</a></li>
+                    <li><a class="dropdown-item" href="anuncios.php"><i class="fas fa-ad"></i> Anúncios</a></li>
                     <li><a class="dropdown-item" href="painelSolicitacoes.php"><i class="fas fa-tasks"></i> Solicitações</a></li>
                   </ul>
                 </li>
@@ -100,8 +101,7 @@ $exibeOffcanvas = isset($_SESSION['usuario_id']);
                     Nova Notícia</a></li>
               <?php endif; ?>
 
-              <li class="nav-item"><a class="nav-link text-danger" href="logout.php"><i class="fas fa-sign-out-alt"></i>
-                  Sair</a></li>
+              <li class="nav-item"><a class="nav-link text-danger" href="logout.php"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
             <?php endif; ?>
           </ul>
         </div>
@@ -121,4 +121,3 @@ $exibeOffcanvas = isset($_SESSION['usuario_id']);
     <?php endif; ?>
   </div>
 </header>
-

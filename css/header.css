@@ -4,11 +4,9 @@
   box-sizing: border-box;
 }
 
-
-
 /* Header principal */
 .topo {
- background-color: #232b3f;
+  background-color: #232b3f;
   height: 100px;
   display: flex;
   align-items: center;
@@ -23,17 +21,20 @@
 /* Container interno do header */
 .cabecalho-container {
   width: 100%;
-  padding: 0 24px; /* evita que os itens grudem nas bordas */
+  padding: 0 24px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;   /* IMPORTANTE: tudo começa à esquerda */
   align-items: center;
+  gap: 18px;                     /* espaço entre logo, widget e outros itens */
 }
 
-
+/* Logo */
 .logo {
-  height: 190px; 
+  height: 56px;    /* Ajuste a gosto. Recomendo bem menor que 190px */
   width: auto;
   display: block;
+  margin-right: 8px;
+  flex-shrink: 0;  /* Nunca encolhe além disso */
 }
 
 /* Menu superior */
@@ -42,7 +43,6 @@
   align-items: center;
   gap: 10px;
 }
-
 .menu-superior a,
 .menu-superior span {
   color: #fff;
@@ -53,22 +53,18 @@
   border-radius: 6px;
   transition: background 0.15s;
 }
-
 .menu-superior a:hover {
   background: #3a4666;
 }
-
 .header-user-info {
   display: flex;
   align-items: center;
   gap: 24px;
 }
-
 .admin-links {
   display: flex;
   gap: 16px;
 }
-
 .admin-links a {
   color: white;
   text-decoration: none;
@@ -77,7 +73,6 @@
   border-radius: 4px;
   transition: background 0.3s;
 }
-
 .admin-links a:hover {
   background-color: #3a4666;
 }
@@ -90,73 +85,30 @@
   cursor: pointer;
 }
 
-@media (max-width: 768px) {
-  .menu-superior {
-    display: none;
-    flex-direction: column;
-    background: #232b3f;
-    position: absolute;
-    top: 100px;
-    right: 0;
-    width: 100%;
-    padding: 10px 0;
-    z-index: 1001;
-  }
-
-  .menu-superior.ativo {
-    display: flex;
-  }
-
-  .menu-superior a {
-    padding: 12px 20px;
-    width: 100%;
-    text-align: left;
-    border-top: 1px solid #3a4666;
-  }
-
-  .menu-toggle {
-    display: block;
-  }
-
-  .cabecalho-container {
-    flex-wrap: wrap;
-  }
-
-  .logo {
-    height: 60px;
-  }
-}
-
-
-/* Cor dos links no Offcanvas */
+/* Offcanvas e outros itens permanecem iguais... */
 .offcanvas.offcanvas-end.text-bg-dark .offcanvas-body .nav-link {
   color: #ffffffcc !important;
   font-weight: 500;
   font-size: 1rem;
   transition: color 0.2s;
 }
-
 .offcanvas.offcanvas-end.text-bg-dark .offcanvas-body .nav-link:hover {
   color: #ffffff !important;
   background-color: #3a4666 !important;
   border-radius: 6px;
   padding-left: 10px;
 }
-
 .offcanvas.offcanvas-end.text-bg-dark .nav-item.dropdown .dropdown-menu a {
   color: #fff !important;
   font-weight: 500;
 }
-
 .offcanvas.offcanvas-end.text-bg-dark .nav-item.dropdown .dropdown-menu a:hover {
   background-color: #3a4d6a !important;
 }
-
 .offcanvas-title {
   color: #fff !important;
   font-weight: bold;
 }
-
 .offcanvas-end {
   width: 270px !important;
   max-width: 90vw;
@@ -165,7 +117,6 @@
   border-radius: 12px 0 0 12px;
   box-shadow: 0 0 20px #232b3f;
 }
-
 @media (max-width: 400px) {
   .offcanvas-end {
     width: 96vw !important;
@@ -173,5 +124,71 @@
     border-radius: 0;
     top: 0;
     height: 100vh !important;
+  }
+}
+
+/* WEATHER WIDGET: Sempre ao lado da logo, nunca quebra linha */
+#weather-widget {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 0;
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+#weather-widget img {
+  width: 38px;
+  height: 38px;
+}
+#weather-widget .weather-info {
+  color: #fff;
+}
+#weather-widget .weather-temp {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 1;
+  color: #fff;
+}
+#weather-widget .weather-desc {
+  font-size: 14px;
+  line-height: 1;
+  color: #fff;
+}
+#weather-widget .weather-city {
+  font-size: 12px;
+  line-height: 1;
+  color: #e5e5e5;
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 600px) {
+  .topo {
+    height: auto;
+    min-height: 44px;
+    padding: 0 4px;
+  }
+  .cabecalho-container {
+    padding: 0 4px;
+    gap: 8px;
+  }
+  .logo {
+    height: 28px;
+    margin-right: 6px;
+  }
+  #weather-widget {
+    gap: 5px;
+  }
+  #weather-widget img {
+    width: 18px;
+    height: 18px;
+  }
+  #weather-widget .weather-temp {
+    font-size: 13px;
+  }
+  #weather-widget .weather-desc,
+  #weather-widget .weather-city {
+    display: none; /* Mostra só temperatura e ícone no mobile! */
   }
 }

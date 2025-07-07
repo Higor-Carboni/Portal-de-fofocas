@@ -36,13 +36,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
-    <header class="topo">
-        <div class="cabecalho-container">
-            <img src="img/logoFofoca500.png" alt="Logo" class="logo">
+    <div class="conteudo-page">
+        <?php include 'includes/header.php'; ?>
 
-        </div>
-    </header>
-    <div class="container">
+        <main class="conteudo">
+            <div class="container">
         <form method="POST" class="form-box">
             <h2>Alterar Perfil</h2>
             <?php if ($msg): ?>
@@ -58,15 +56,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="button" onclick="window.location.href='dashboard.php'">Voltar</button>
             </div>
         </form>
+            </div>
+        </main>
+
+        <?php include 'includes/footer.php'; ?>
     </div>
-    <footer>
-        <div class="redes">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-        </div>
-        <small>© Fofoquei News — Todos os direitos reservados</small>
-    </footer>
 </body>
 
 </html>

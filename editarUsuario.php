@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email'] ?? '');
     $perfil = $_POST['perfil'] ?? 'comum';
 
-    if ($nome && $email && in_array($perfil, ['admin', 'comum', 'normal'])) {
+    if ($nome && $email && in_array($perfil, ['admin', 'comum'])) {
         $stmt = $pdo->prepare("UPDATE usuarios SET nome = ?, email = ?, perfil = ? WHERE id = ?");
         $stmt->execute([$nome, $email, $perfil, $id]);
 

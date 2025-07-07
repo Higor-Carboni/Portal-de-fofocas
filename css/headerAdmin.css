@@ -1,4 +1,8 @@
 /* =================== HEADER ADMIN - DROPDOWN =================== */
+html,
+body {
+  background: #f5f6fa;
+}
 
 .dropdown {
   position: relative;
@@ -47,6 +51,7 @@
   display: block !important;
 }
 
+
 /* =================== MENU HAMBURGUER =================== */
 .menu-icon {
   display: none;
@@ -87,9 +92,11 @@
 }
 
 .logo {
-  height: 190px;
+  height: 80px; /* ou o valor que preferir */
   width: auto;
   display: block;
+  margin-right: 8px;
+  flex-shrink: 0;
 }
 
 /* =================== LINKS E CONTAINERS =================== */
@@ -217,5 +224,83 @@
     flex-direction: column;
     width: 100%;
     gap: 12px;
+  }
+}
+
+/* --- FIX: Força dropdown do Bootstrap dentro do OFFCANVAS --- */
+.offcanvas .dropdown-menu {
+  position: absolute !important;
+  z-index: 1200 !important;
+  left: 0 !important;
+  top: 100% !important;
+  display: none;
+  opacity: 1;
+  visibility: visible;
+  margin-top: 0.3rem;
+  min-width: 180px;
+}
+.offcanvas .dropdown.show .dropdown-menu {
+  display: block !important;
+}
+
+/* ========= CORRIGE COR DO CLIMA NO HEADER ADMIN ========= */
+#weather-widget,
+#weather-widget .weather-info,
+#weather-widget .weather-temp,
+#weather-widget .weather-desc,
+#weather-widget .weather-city {
+  color: #fff !important;
+}
+
+/* Widget do clima — layout igual ao header comum */
+#weather-widget {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 0;
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+#weather-widget img {
+  width: 38px;
+  height: 38px;
+}
+#weather-widget .weather-info {
+  color: #fff;
+}
+#weather-widget .weather-temp {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 1;
+  color: #fff;
+}
+#weather-widget .weather-desc {
+  font-size: 14px;
+  line-height: 1;
+  color: #fff;
+}
+#weather-widget .weather-city {
+  font-size: 12px;
+  line-height: 1;
+  color: #e5e5e5;
+}
+
+/* Responsividade igual ao comum */
+@media (max-width: 600px) {
+  #weather-widget {
+    gap: 5px;
+  }
+  #weather-widget img {
+    width: 18px;
+    height: 18px;
+  }
+  #weather-widget .weather-temp {
+    font-size: 13px;
+  }
+  #weather-widget .weather-desc,
+  #weather-widget .weather-city {
+    display: none;
   }
 }

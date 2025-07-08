@@ -1,10 +1,7 @@
 <?php
-session_start();
 require_once 'conexao.php';
 require_once 'funcoes.php';
-
-// Ativar modo de erro para debugging
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+session_start();
 
 // Ativar modo de erro para debugging
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

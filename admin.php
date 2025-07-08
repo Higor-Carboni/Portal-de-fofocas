@@ -1,6 +1,6 @@
 <?php
-session_start();
 require_once 'conexao.php';
+session_start();
 
 // Verifica se está logado como admin
 if (!isset($_SESSION['usuario_id']) || $_SESSION['usuario_perfil'] !== 'admin') {

@@ -200,39 +200,31 @@
   }
 }
 
-/* Botão Dark Mode para Visitantes */
-.btn-darkmode-visitante {
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 1.2rem;
-  padding: 8px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.15s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+body.dark-mode {
+  background: #181818 !important;
+  color: #f3f3f3 !important;
 }
-
-.btn-darkmode-visitante:hover {
-  background: #3a4666;
+body.dark-mode .topo,
+body.dark-mode .offcanvas,
+body.dark-mode header,
+body.dark-mode .cabecalho-container {
+  background: #222 !important;
+  color: #eee !important;
 }
-
-.btn-darkmode-visitante i {
-  transition: transform 0.2s;
+body.dark-mode .nav-link,
+body.dark-mode .dropdown-menu,
+body.dark-mode .dropdown-item {
+  background: #222 !important;
+  color: #eee !important;
 }
-
-.btn-darkmode-visitante:hover i {
-  transform: scale(1.1);
+body.dark-mode .navbar-toggler,
+body.dark-mode .btn,
+body.dark-mode .btn-outline-secondary {
+  background: #333 !important;
+  color: #eee !important;
+  border-color: #555 !important;
 }
-
-/* Responsividade para o botão dark mode */
-@media (max-width: 600px) {
-  .btn-darkmode-visitante {
-    font-size: 1rem;
-    padding: 6px 10px;
-  }
-}
+body.dark-mode .offcanvas {
+  background-color: #222 !important;
 }
 

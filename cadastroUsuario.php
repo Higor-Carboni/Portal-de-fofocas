@@ -74,8 +74,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <select id="perfil" name="perfil" required>
                         <option value="comum" <?= ($_POST['perfil'] ?? '') === 'comum' ? 'selected' : '' ?>>Comum
                         </option>
-                        <option value="normal" <?= ($_POST['perfil'] ?? '') === 'normal' ? 'selected' : '' ?>>Normal
-                        </option>
                         <option value="admin" <?= ($_POST['perfil'] ?? '') === 'admin' ? 'selected' : '' ?>>Admin
                         </option>
                     </select>
@@ -86,7 +84,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 </form>
             </div>
-            </section>
         </main>
 
         <?php include 'includes/footer.php'; ?>

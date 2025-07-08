@@ -1,5 +1,5 @@
 <?php
-if (session_status() !== PHP_SESSION_ACTIVE) session_start();
+// A sessão já deve estar iniciada nos arquivos que incluem este header
 $paginaAtual = basename($_SERVER['PHP_SELF']);
 $exibeOffcanvas = isset($_SESSION['usuario_id']);
 ?>
@@ -52,8 +52,8 @@ $exibeOffcanvas = isset($_SESSION['usuario_id']);
                   </a>
                   <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="adminDropdown">
                     <li><a class="dropdown-item" href="usuarios.php"><i class="fas fa-users"></i> Usuários</a></li>
+                    <li><a class="dropdown-item" href="anuncios.php"><i class="fas fa-ad"></i> Anúncios</a></li>
                     <li><a class="dropdown-item" href="painelSolicitacoes.php"><i class="fas fa-tasks"></i> Solicitações</a></li>
-                    <li><a class="dropdown-item" href="anuncios/anuncio.php"><i class="fas fa-bullhorn"></i> Anúncios</a></li>
                   </ul>
                 </li>
               <?php else: ?>

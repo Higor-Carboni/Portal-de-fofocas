@@ -34,267 +34,9 @@ $outras_noticias = $stmtOutras->fetchAll();
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/noticia.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
-        .noticia-main-layout {
-            display: flex;
-            gap: 32px;
-            max-width: 1400px;
-            margin: 0 auto;
-            margin-top: 32px;
-            margin-bottom: 32px;
-        }
-        .noticia-container {
-            flex: 2 1 0%;
-            background: #fff;
-            border-radius: 22px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.10);
-            padding: 48px 56px 36px 56px;
-            min-width: 0;
-            transition: background 0.3s, color 0.3s;
-        }
-        .noticia-header {
-            text-align: left;
-            margin-bottom: 32px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-        .noticia-titulo {
-            font-size: 3.2rem;
-            font-weight: 900;
-            color: #2c3e50;
-            line-height: 1.12;
-            margin-bottom: 18px;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.07);
-        }
-        .noticia-imagem-container {
-            margin: 44px 0 32px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            border-radius: 18px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.13);
-        }
-        .noticia-imagem {
-            max-width: 100%;
-            max-height: 700px;
-            width: auto;
-            height: auto;
-            object-fit: cover;
-            border-radius: 18px;
-            transition: transform 0.3s;
-        }
-        .noticia-imagem:hover {
-            transform: scale(1.04);
-        }
-        .noticia-conteudo {
-            font-size: 1.28rem;
-            line-height: 2.1;
-            color: #2c3e50;
-            text-align: justify;
-            margin: 44px 0 28px 0;
-            padding: 0 10px;
-        }
-        .noticia-acoes {
-            display: flex;
-            justify-content: flex-start;
-            gap: 22px;
-            margin-top: 44px;
-            padding-top: 32px;
-            border-top: 2px solid #f0f0f0;
-            flex-wrap: wrap;
-        }
-        .btn-noticia {
-            padding: 14px 32px;
-            border: none;
-            border-radius: 10px;
-            font-weight: 700;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.1rem;
-            box-shadow: 0 2px 12px #0001;
-            cursor: pointer;
-            transition: all 0.25s;
-            letter-spacing: 0.5px;
-        }
-        .btn-voltar-noticia {
-            background: linear-gradient(135deg, #7b5cff 0%, #3e8ef7 100%);
-            color: #fff;
-            border: 2px solid #7b5cff;
-        }
-        .btn-voltar-noticia:hover {
-            background: linear-gradient(135deg, #3e8ef7 0%, #7b5cff 100%);
-            color: #fff;
-            transform: translateY(-2px) scale(1.04);
-            box-shadow: 0 6px 20px rgba(62, 142, 247, 0.18);
-        }
-        .btn-compartilhar {
-            background: linear-gradient(135deg, #00c896 0%, #00b4d8 100%);
-            color: #fff;
-            border: 2px solid #00c896;
-        }
-        .btn-compartilhar:hover {
-            background: linear-gradient(135deg, #00b4d8 0%, #00c896 100%);
-            color: #fff;
-            transform: translateY(-2px) scale(1.04);
-            box-shadow: 0 6px 20px rgba(0, 200, 150, 0.18);
-        }
-        .noticia-tags {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-        .sidebar-outras-noticias {
-            flex: 1 1 320px;
-            min-width: 260px;
-            max-width: 370px;
-            background: #fff;
-            border-radius: 16px;
-            box-shadow: 0 4px 18px #0001;
-            padding: 24px 18px 18px 18px;
-            height: fit-content;
-            align-self: flex-start;
-            transition: background 0.3s, color 0.3s;
-        }
-        .sidebar-outras-noticias h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 18px;
-            color: #3a4666;
-        }
-        .card-outra-noticia {
-            display: flex;
-            gap: 14px;
-            margin-bottom: 18px;
-            background: #f7f8fa;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px #0001;
-            overflow: hidden;
-            transition: box-shadow 0.2s, background 0.3s;
-        }
-        .card-outra-noticia:hover {
-            box-shadow: 0 6px 18px #0002;
-            background: #f0f3fa;
-        }
-        .card-outra-noticia-img {
-            width: 70px;
-            height: 70px;
-            object-fit: cover;
-            border-radius: 10px 0 0 10px;
-            background: #e0e0e0;
-        }
-        .card-outra-noticia-info {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 6px 0;
-        }
-        .card-outra-noticia-titulo {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #232b3f;
-            margin-bottom: 4px;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            overflow: hidden;
-        }
-        .card-outra-noticia-data {
-            font-size: 0.85rem;
-            color: #7f8c8d;
-        }
-        /* DARK MODE */
-        body.dark-mode {
-            background: #181c24;
-        }
-        body.dark-mode .noticia-container {
-            background: #232b3f;
-            color: #f2f2f2;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-        }
-        body.dark-mode .noticia-header {
-            border-bottom: 2px solid #232b3f;
-        }
-        body.dark-mode .noticia-titulo {
-            color: #fff;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.18);
-        }
-        body.dark-mode .noticia-conteudo {
-            color: #e0e0e0;
-        }
-        body.dark-mode .noticia-acoes {
-            border-top: 2px solid #232b3f;
-        }
-        body.dark-mode .btn-voltar-noticia {
-            background: linear-gradient(135deg, #3e8ef7 0%, #7b5cff 100%);
-            color: #fff;
-            border: 2px solid #7b5cff;
-        }
-        body.dark-mode .btn-voltar-noticia:hover {
-            background: linear-gradient(135deg, #7b5cff 0%, #3e8ef7 100%);
-            color: #fff;
-        }
-        body.dark-mode .btn-compartilhar {
-            background: linear-gradient(135deg, #00b4d8 0%, #00c896 100%);
-            color: #fff;
-            border: 2px solid #00c896;
-        }
-        body.dark-mode .btn-compartilhar:hover {
-            background: linear-gradient(135deg, #00c896 0%, #00b4d8 100%);
-            color: #fff;
-        }
-        body.dark-mode .sidebar-outras-noticias {
-            background: #232b3f;
-            color: #f2f2f2;
-            box-shadow: 0 4px 18px #0004;
-        }
-        body.dark-mode .sidebar-outras-noticias h3 {
-            color: #b3b8c5;
-        }
-        body.dark-mode .card-outra-noticia {
-            background: #232b3f;
-            color: #f2f2f2;
-            box-shadow: 0 2px 8px #0004;
-        }
-        body.dark-mode .card-outra-noticia:hover {
-            background: #181c24;
-        }
-        body.dark-mode .card-outra-noticia-titulo {
-            color: #fff;
-        }
-        body.dark-mode .card-outra-noticia-data {
-            color: #b3b8c5;
-        }
-        @media (max-width: 1100px) {
-            .noticia-main-layout {
-                flex-direction: column;
-                gap: 0;
-            }
-            .sidebar-outras-noticias {
-                max-width: 100%;
-                margin: 32px 0 0 0;
-                align-self: stretch;
-            }
-        }
-        @media (max-width: 700px) {
-            .noticia-container {
-                padding: 16px 4vw;
-            }
-            .noticia-titulo {
-                font-size: 1.7rem;
-            }
-            .noticia-imagem {
-                max-height: 220px;
-            }
-            .sidebar-outras-noticias {
-                padding: 12px 2vw;
-            }
-        }
-    </style>
 </head>
 <body>
     <div class="conteudo-page">
@@ -399,7 +141,7 @@ $outras_noticias = $stmtOutras->fetchAll();
                 
                 if (navigator.clipboard) {
                     navigator.clipboard.writeText(textToShare).then(() => {
-                        alert('Link da notícia copiado para a área de transferência!');
+                        mostrarNotificacao('Link da notícia copiado para a área de transferência!', 'sucesso');
                     });
                 } else {
                     // Fallback para navegadores mais antigos
@@ -409,9 +151,107 @@ $outras_noticias = $stmtOutras->fetchAll();
                     textArea.select();
                     document.execCommand('copy');
                     document.body.removeChild(textArea);
-                    alert('Link da notícia copiado para a área de transferência!');
+                    mostrarNotificacao('Link da notícia copiado para a área de transferência!', 'sucesso');
                 }
             }
+        }
+
+        // Função para mostrar notificações
+        function mostrarNotificacao(mensagem, tipo = 'info') {
+            // Remover notificação anterior se existir
+            const notificacaoExistente = document.querySelector('.notificacao');
+            if (notificacaoExistente) {
+                notificacaoExistente.remove();
+            }
+
+            const notificacao = document.createElement('div');
+            notificacao.className = `notificacao notificacao-${tipo}`;
+            notificacao.innerHTML = `
+                <div class="notificacao-conteudo">
+                    <i class="fas ${tipo === 'sucesso' ? 'fa-check-circle' : 'fa-info-circle'}"></i>
+                    <span>${mensagem}</span>
+                </div>
+                <button class="notificacao-fechar" onclick="this.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+
+            // Adicionar estilos inline para a notificação
+            notificacao.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${tipo === 'sucesso' ? '#00c896' : '#3e8ef7'};
+                color: white;
+                padding: 12px 16px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 10000;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                max-width: 300px;
+                animation: slideIn 0.3s ease-out;
+                font-size: 0.9rem;
+            `;
+
+            // Adicionar estilos para os elementos internos
+            const conteudo = notificacao.querySelector('.notificacao-conteudo');
+            conteudo.style.cssText = `
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                flex: 1;
+            `;
+
+            const fechar = notificacao.querySelector('.notificacao-fechar');
+            fechar.style.cssText = `
+                background: none;
+                border: none;
+                color: white;
+                cursor: pointer;
+                padding: 4px;
+                border-radius: 4px;
+                transition: background 0.2s;
+            `;
+
+            // Adicionar animação CSS
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from {
+                        transform: translateX(100%);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                }
+                
+                .notificacao-fechar:hover {
+                    background: rgba(255,255,255,0.2) !important;
+                }
+                
+                @media (max-width: 480px) {
+                    .notificacao {
+                        top: 10px !important;
+                        right: 10px !important;
+                        left: 10px !important;
+                        max-width: none !important;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+
+            document.body.appendChild(notificacao);
+
+            // Remover automaticamente após 5 segundos
+            setTimeout(() => {
+                if (notificacao.parentElement) {
+                    notificacao.remove();
+                }
+            }, 5000);
         }
 
         // Adicionar efeito de fade-in na imagem
@@ -430,7 +270,83 @@ $outras_noticias = $stmtOutras->fetchAll();
                     imagem.style.opacity = '1';
                 }
             }
+
+            // Melhorar acessibilidade dos cards de outras notícias
+            const cardsNoticias = document.querySelectorAll('.card-outra-noticia');
+            cardsNoticias.forEach(card => {
+                card.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.click();
+                    }
+                });
+                
+                // Adicionar role para acessibilidade
+                card.setAttribute('role', 'button');
+                card.setAttribute('tabindex', '0');
+            });
+
+            // Lazy loading para imagens dos cards
+            const imagensCards = document.querySelectorAll('.card-outra-noticia-img');
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            if (img.dataset.src) {
+                                img.src = img.dataset.src;
+                                img.removeAttribute('data-src');
+                                imageObserver.unobserve(img);
+                            }
+                        }
+                    });
+                });
+
+                imagensCards.forEach(img => {
+                    if (img.src) {
+                        img.dataset.src = img.src;
+                        img.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzAiIGhlaWdodD0iNzAiIHZpZXdCb3g9IjAgMCA3MCA3MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjcwIiBoZWlnaHQ9IjcwIiBmaWxsPSIjRjBGMEYwIi8+CjxwYXRoIGQ9Ik0zNSAzNUw0MCA0MEwzMCA0MFYzNUgzNVoiIGZpbGw9IiNDQ0NDQ0MiLz4KPC9zdmc+';
+                        imageObserver.observe(img);
+                    }
+                });
+            }
         });
+
+        // Melhorar performance em dispositivos móveis
+        let scrollTimeout;
+        window.addEventListener('scroll', function() {
+            if (scrollTimeout) {
+                clearTimeout(scrollTimeout);
+            }
+            
+            scrollTimeout = setTimeout(() => {
+                const btn = document.getElementById('topo');
+                btn.style.display = window.scrollY > 300 ? 'block' : 'none';
+            }, 10);
+        }, { passive: true });
+
+        // Adicionar suporte para gestos de toque
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartY - touchEndY;
+            
+            // Swipe para cima (voltar ao topo)
+            if (diff > swipeThreshold && window.scrollY > 500) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
     </script>
 </body>
 </html>

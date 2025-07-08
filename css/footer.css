@@ -22,7 +22,7 @@ footer .redes a:hover {
   color: #2c0aa5;
 }
 
-#topo {
+#btn-topo {
   position: fixed;
   right: 24px;
   bottom: 24px;
@@ -42,7 +42,7 @@ footer .redes a:hover {
   transition: background 0.15s, transform 0.15s;
 }
 
-#topo:hover {
+#btn-topo:hover {
   background: #3a4666;
   transform: scale(1.08);
 }

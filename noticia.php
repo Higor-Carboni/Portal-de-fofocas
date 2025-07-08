@@ -381,16 +381,7 @@ $outras_noticias = $stmtOutras->fetchAll();
         <?php include 'includes/footer.php'; ?>
     </div>
 
-    <button id="topo" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });" title="Voltar ao topo">
-        <i class="fas fa-arrow-up"></i>
-    </button>
 
-    <script>
-        // Botão voltar ao topo
-        window.addEventListener('scroll', function () {
-            const btn = document.getElementById('topo');
-            btn.style.display = window.scrollY > 300 ? 'block' : 'none';
-        });
 
         // Função para compartilhar notícia
         function compartilharNoticia() {

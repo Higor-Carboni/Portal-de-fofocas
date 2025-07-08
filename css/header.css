@@ -200,3 +200,39 @@
   }
 }
 
+/* Botão Dark Mode para Visitantes */
+.btn-darkmode-visitante {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-darkmode-visitante:hover {
+  background: #3a4666;
+}
+
+.btn-darkmode-visitante i {
+  transition: transform 0.2s;
+}
+
+.btn-darkmode-visitante:hover i {
+  transform: scale(1.1);
+}
+
+/* Responsividade para o botão dark mode */
+@media (max-width: 600px) {
+  .btn-darkmode-visitante {
+    font-size: 1rem;
+    padding: 6px 10px;
+  }
+}
+}
+

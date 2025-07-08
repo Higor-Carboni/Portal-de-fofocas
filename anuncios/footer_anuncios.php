@@ -20,7 +20,7 @@
 </footer>
 
 <!-- Botão de voltar ao topo -->
-<button id="topo" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
+<button id="btn-topo" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
     <i class="fas fa-arrow-up"></i>
 </button>
 
@@ -28,7 +28,9 @@
 <script>
     // Exibir botão de topo ao rolar a página
     window.addEventListener('scroll', function () {
-        const btn = document.getElementById('topo');
-        btn.style.display = window.scrollY > 300 ? 'block' : 'none';
+        const btn = document.getElementById('btn-topo');
+        if (btn) {
+            btn.style.display = window.scrollY > 300 ? 'block' : 'none';
+        }
     });
 </script> 

@@ -61,15 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     </div>
 
-    <!-- Botão voltar ao topo -->
-    <button id="topo" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">↑</button>
 
-    <script>
-        window.addEventListener('scroll', function () {
-            const btn = document.getElementById('topo');
-            btn.style.display = window.scrollY > 300 ? 'block' : 'none';
-        });
-    </script>
 
 </body>
 

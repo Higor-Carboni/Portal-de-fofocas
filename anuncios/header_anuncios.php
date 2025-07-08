@@ -64,6 +64,7 @@ $exibeOffcanvas = isset($_SESSION['usuario_id']);
               <li class="nav-item">
                 <a class="nav-link text-danger" href="../logout.php"><i class="fas fa-sign-out-alt"></i> Sair</a>
               </li>
+            <?php endif; ?>
 
               <!-- ABA ACESSIBILIDADE COMO DROPDOWN -->
               <li class="nav-item dropdown">
@@ -79,7 +80,6 @@ $exibeOffcanvas = isset($_SESSION['usuario_id']);
                   </li>
                 </ul>
               </li>
-            <?php endif; ?>
           </ul>
         </div>
       </div>
@@ -94,6 +94,11 @@ $exibeOffcanvas = isset($_SESSION['usuario_id']);
           </span>
           <a href="../logout.php" class="link-header text-danger"><i class="fas fa-sign-out-alt"></i> Sair</a>
         <?php endif; ?>
+        
+        <!-- BOTÃO DARK MODE PARA VISITANTES -->
+        <button class="btn-darkmode-visitante" id="toggle-darkmode-btn-visitante" type="button" title="Alternar Dark Mode">
+          <i class="fa fa-moon"></i>
+        </button>
       </nav>
     <?php endif; ?>
   </div>
@@ -104,13 +109,24 @@ document.addEventListener('DOMContentLoaded', function() {
     function atualizaBotaoDarkMode() {
         const status = document.getElementById('darkmode-status');
         const icon = document.querySelector('#toggle-darkmode-btn i');
-        if (!status || !icon) return;
-        if(document.body.classList.contains('dark-mode')) {
-            status.textContent = 'Desativar Dark Mode';
-            icon.className = 'fa fa-sun';
-        } else {
-            status.textContent = 'Ativar Dark Mode';
-            icon.className = 'fa fa-moon';
+        const iconVisitante = document.querySelector('#toggle-darkmode-btn-visitante i');
+        
+        if (status && icon) {
+            if(document.body.classList.contains('dark-mode')) {
+                status.textContent = 'Desativar Dark Mode';
+                icon.className = 'fa fa-sun';
+            } else {
+                status.textContent = 'Ativar Dark Mode';
+                icon.className = 'fa fa-moon';
+            }
+        }
+        
+        if (iconVisitante) {
+            if(document.body.classList.contains('dark-mode')) {
+                iconVisitante.className = 'fa fa-sun';
+            } else {
+                iconVisitante.className = 'fa fa-moon';
+            }
         }
     }
 
@@ -120,10 +136,24 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     atualizaBotaoDarkMode();
 
-    // Evento do botão
+    // Evento do botão para usuários logados
     const btn = document.getElementById('toggle-darkmode-btn');
     if (btn) {
         btn.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            if(document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkmode', '1');
+            } else {
+                localStorage.removeItem('darkmode');
+            }
+            atualizaBotaoDarkMode();
+        });
+    }
+
+    // Evento do botão para visitantes
+    const btnVisitante = document.getElementById('toggle-darkmode-btn-visitante');
+    if (btnVisitante) {
+        btnVisitante.addEventListener('click', function() {
             document.body.classList.toggle('dark-mode');
             if(document.body.classList.contains('dark-mode')) {
                 localStorage.setItem('darkmode', '1');

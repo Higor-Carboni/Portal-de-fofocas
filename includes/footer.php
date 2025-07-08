@@ -25,20 +25,12 @@
 </button>
 
 <script>
-
-    // Exibir botão de topo ao rolar a página
-    window.addEventListener('scroll', function () {
-        const btn = document.getElementById('topo');
-        btn.style.display = window.scrollY > 300 ? 'block' : 'none';
-    });
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-
   // Exibir botão de topo ao rolar a página
   window.addEventListener('scroll', function () {
     const btn = document.getElementById('btn-topo');
-    btn.style.display = window.scrollY > 10 ? 'block' : 'none';
+    if (btn) {
+      btn.style.display = window.scrollY > 10 ? 'block' : 'none';
+    }
   });
 </script>
 

@@ -31,10 +31,17 @@ $exibeOffcanvas = isset($_SESSION['usuario_id']);
       <img src="img/logoFofoca500.png" alt="Logo" class="logo">
     </a>
 
+
     <h1 class="titulo-portal">Portal de Notícias</h1>
 
     <!-- Previsão do tempo -->
     <div id="weather-widget" style="display:flex;align-items:center;gap:8px;margin-left:16px;"></div>
+
+    <!-- Botão Dark Mode -->
+    <button id="toggle-dark-mode" class="btn btn-outline-secondary ms-3" style="font-size:20px;">
+      <i class="fas fa-moon"></i>
+    </button>
+
     <script>
       const WEATHER_API_KEY = '968f7d1cc54d497422288815e7cebb49';
       const WEATHER_CITY = 'Sapucaia do Sul';
@@ -94,7 +101,8 @@ $exibeOffcanvas = isset($_SESSION['usuario_id']);
                   <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="adminDropdown">
                     <li><a class="dropdown-item" href="usuarios.php"><i class="fas fa-users"></i> Usuários</a></li>
                     <li><a class="dropdown-item" href="anuncios.php"><i class="fas fa-ad"></i> Anúncios</a></li>
-                    <li><a class="dropdown-item" href="painelSolicitacoes.php"><i class="fas fa-tasks"></i> Solicitações</a></li>
+                    <li><a class="dropdown-item" href="painelSolicitacoes.php"><i class="fas fa-tasks"></i> Solicitações</a>
+                    </li>
                   </ul>
                 </li>
               <?php else: ?>
@@ -102,9 +110,9 @@ $exibeOffcanvas = isset($_SESSION['usuario_id']);
                 <li class="nav-item"><a class="nav-link text-white" href="cadastroNoticia.php"><i class="fas fa-plus"></i> Nova Notícia</a></li>
               <?php endif; ?>
 
-              <li class="nav-item">
-                <a class="nav-link text-danger" href="logout.php"><i class="fas fa-sign-out-alt"></i> Sair</a>
-              </li>
+              <li class="nav-item"><a class="nav-link text-danger" href="logout.php"><i class="fas fa-sign-out-alt"></i>
+                  Sair</a></li>
+
             <?php endif; ?>
 
             <!-- Acessibilidade -->
@@ -143,6 +151,22 @@ $exibeOffcanvas = isset($_SESSION['usuario_id']);
     <?php endif; ?>
   </div>
 </header>
+
+<script>
+  // Aplica dark mode se o usuário já tinha escolhido antes
+  if(localStorage.getItem('dark-mode') === 'true') {
+    document.body.classList.add('dark-mode');
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const btn = document.getElementById('toggle-dark-mode');
+    if (!btn) return;
+    btn.addEventListener('click', function() {
+      document.body.classList.toggle('dark-mode');
+      localStorage.setItem('dark-mode', document.body.classList.contains('dark-mode'));
+    });
+  });
+</script>
 
 <!-- BOOTSTRAP JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
@@ -229,3 +253,4 @@ $exibeOffcanvas = isset($_SESSION['usuario_id']);
     }
   });
 </script>
+

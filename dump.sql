@@ -30,7 +30,6 @@ CREATE TABLE IF NOT EXISTS noticias (
     FOREIGN KEY (categoria_id) REFERENCES categorias(id)
 );
 
-
 -- Tabela de Anúncios
 CREATE TABLE IF NOT EXISTS anuncios (
     id INT AUTO_INCREMENT PRIMARY KEY,

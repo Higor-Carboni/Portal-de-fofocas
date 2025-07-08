@@ -1,0 +1,170 @@
+<?php
+require '../verifica_login.php';
+require '../conexao.php';
+$anunciantes = $pdo->query("SELECT * FROM anuncio ORDER BY data_cadastro DESC")->fetchAll(PDO::FETCH_ASSOC);
+?>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Anunciantes</title>
+    <!-- CSS carregado no header específico -->
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .btn-cadastrar-noticia {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .btn-cadastrar-noticia:hover {
+            background-color: #45a049;
+        }
+
+        .table img {
+            max-width: 80px;
+            max-height: 60px;
+            border-radius: 6px;
+        }
+
+        .conteudo {
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.05);
+            margin: 20px auto;
+            max-width: 98%;
+        }
+
+        .titulo-pagina {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #232b3f;
+        }
+
+        .form-botoes {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .form-botoes button {
+            background-color: #6c757d;
+            color: white;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .form-botoes button:hover {
+            background-color: #5a6268;
+        }
+
+        .btn-acoes a {
+            margin: 0 6px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .btn-acoes a:hover {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+<div class="conteudo-page">
+    <?php include 'header_anuncios.php'; ?>
+
+    <main class="conteudo container-fluid">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="titulo-pagina"><i class="fas fa-bullhorn"></i> Anunciantes</h2>
+            <a href="novo_anuncio.php" class="btn-cadastrar-noticia" title="Novo Anunciante">
+                <i class="fas fa-plus"></i> Novo Anunciante
+            </a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered align-middle text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Imagem</th>
+                        <th>Link</th>
+                        <th>Texto</th>
+                        <th>Ativo</th>
+                        <th>Destaque</th>
+                        <th>Valor</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($anunciantes as $a): ?>
+                    <tr>
+                        <td><?= $a['id'] ?></td>
+                        <td><?= htmlspecialchars($a['nome']) ?></td>
+                        <td>
+                            <?php if ($a['imagem']): ?>
+                                <img src="<?= htmlspecialchars($a['imagem']) ?>" alt="Imagem">
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <?php if ($a['link']): ?>
+                                <a href="<?= htmlspecialchars($a['link']) ?>" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            <?php endif; ?>
+                        </td>
+                        <td><?= htmlspecialchars($a['texto']) ?></td>
+                        <td>
+                            <?php if ($a['ativo']): ?>
+                                <span class="text-success"><i class="fas fa-check-circle"></i> Sim</span>
+                            <?php else: ?>
+                                <span class="text-danger"><i class="fas fa-times-circle"></i> Não</span>
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <?php if ($a['destaque']): ?>
+                                <span style="color: #ffb300;"><i class="fas fa-star"></i> Sim</span>
+                            <?php else: ?>
+                                <span style="color: #888;"><i class="far fa-star"></i> Não</span>
+                            <?php endif; ?>
+                        </td>
+                        <td>R$ <?= number_format($a['valorAnuncio'], 2, ',', '.') ?></td>
+                        <td>
+                            <div class="btn-acoes">
+                                <a href="editar_anuncio.php?id=<?= $a['id'] ?>" title="Editar">
+                                    <i class="fas fa-pen"></i>
+                                </a>
+                                <a href="excluir_anuncio.php?id=<?= $a['id'] ?>" onclick="return confirm('Excluir este anúncio?')" title="Excluir">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-botoes">
+            <button onclick="window.location.href='../dashboard.php'">Voltar</button>
+        </div>
+    </main>
+
+    <?php include 'footer_anuncios.php'; ?>
+</div>
+
+<!-- Scripts carregados no footer específico -->
+</body>
+</html>

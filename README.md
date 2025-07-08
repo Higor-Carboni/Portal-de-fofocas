@@ -154,3 +154,4 @@ Para dúvidas ou problemas, verifique:
 2. Permissões de pasta para uploads
 3. Configuração do PHP (extensões necessárias)
 4. Logs de erro do servidor
+

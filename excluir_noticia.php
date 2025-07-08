@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </p>
                 <form method="POST" class="form-botoes">
                     <button type="submit" style="background: #c62828;">Sim, excluir</button>
-                    <button type="button" onclick="window.location.href='dashboard.php'">Voltar</button>
+                    <button type="button" onclick="window.location.replace('index.php')">Voltar</button>
                 </form>
 
 

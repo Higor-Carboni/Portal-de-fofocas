@@ -31,91 +31,25 @@ $usuarios = $pdo->query("SELECT u.nome, COUNT(n.id) AS total FROM usuarios u LEF
 
     <!-- Estilos base -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/headerAdmin.css">
     <link rel="stylesheet" href="css/footer.css">
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Estilo do header exclusivo para ADMIN -->
     <?php if ($_SESSION['usuario_perfil'] === 'admin'): ?>
         <link rel="stylesheet" href="css/headerAdmin.css">
     <?php else: ?>
-        <!-- Estilo do header exclusivo para Isuario Comum -->
-        <link rel="Stylesheet" href="css/header.css">
+        <!-- Estilo do header exclusivo para Usuario Comum -->
+        <link rel="stylesheet" href="css/header.css">
     <?php endif; ?>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-
-    <!-- Chart.js (se necessário) -->
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        const categoriasChart = new Chart(document.getElementById('categoriasChart'), {
-            type: 'bar',
-            data: {
-                labels: ['Política', 'Esportes', 'Entretenimento'],
-                datasets: [{
-                    label: 'Notícias',
-                    data: [12, 19, 7],
-                    backgroundColor: '#6C63FF'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { labels: { color: '#232b3f' } }
-                },
-                scales: {
-                    x: { ticks: { color: '#232b3f' } },
-                    y: { ticks: { color: '#232b3f' }, beginAtZero: true }
-                }
-            }
-        });
-
-        const usuariosChart = new Chart(document.getElementById('usuariosChart'), {
-            type: 'doughnut',
-            data: {
-                labels: ['Usuários', 'Redatores'],
-                datasets: [{
-                    label: 'Total',
-                    data: [40, 10],
-                    backgroundColor: ['#6C63FF', '#E2725B']
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { labels: { color: '#232b3f' } }
-                }
-            }
-        });
-
-        const noticiasPeriodoChart = new Chart(document.getElementById('noticiasPeriodoChart'), {
-            type: 'bar',
-            data: {
-                labels: ['Hoje', 'Esta Semana'],
-                datasets: [{
-                    label: 'Notícias',
-                    data: [2, 12],
-                    backgroundColor: '#E2725B'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { labels: { color: '#232b3f' } }
-                },
-                scales: {
-                    x: { ticks: { color: '#232b3f' } },
-                    y: { ticks: { color: '#232b3f' }, beginAtZero: true }
-                }
-            }
-        });
-    </script>
 </head>
-
+<body>
     <div class="wrapper">
         <?php include 'includes/header.php'; ?>
 
@@ -146,7 +80,7 @@ $usuarios = $pdo->query("SELECT u.nome, COUNT(n.id) AS total FROM usuarios u LEF
                     <p><?= intval($noticiasSemana) ?></p>
                 </div>
             </div>
-
+            
             <section class="area-graficos">
                 <div class="graficos-dashboard">
                     <div class="grafico-box" id="categoriasChart-container">
@@ -221,8 +155,6 @@ $usuarios = $pdo->query("SELECT u.nome, COUNT(n.id) AS total FROM usuarios u LEF
         <?php include 'includes/footer.php'; ?>
     </div>
 
-
-
     <script>
         new Chart(document.getElementById('categoriasChart'), {
             type: 'bar',
@@ -291,12 +223,13 @@ $usuarios = $pdo->query("SELECT u.nome, COUNT(n.id) AS total FROM usuarios u LEF
             }
         });
 
-
-    // Botão para exibir topo
-    window.addEventListener('scroll', function () {
-    const btn = document.getElementById('topo');
-    btn.style.display = window.scrollY > 100 ? 'block' : 'none';
-    });
+        // Botão para exibir topo
+        window.addEventListener('scroll', function () {
+            const btn = document.getElementById('btn-topo');
+            if (btn) {
+                btn.style.display = window.scrollY > 100 ? 'block' : 'none';
+            }
+        });
     </script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <?php
+session_start();
 require_once 'conexao.php';
 require_once 'funcoes.php';
-session_start();
 
 if (!isset($_SESSION['usuario_id'])) {
     header('Location: login.php');
@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <div class="form-botoes">
                     <button type="submit">Salvar</button>
-                    <button type="button" onclick="window.location.href='dashboard.php'">Voltar</button>
+                    <button type="button" onclick="window.location.replace('index.php')">Voltar</button>
                 </div>
             </form>
         </main>

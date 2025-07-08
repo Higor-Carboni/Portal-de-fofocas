@@ -114,7 +114,7 @@ $solicitacoes = $stmt->fetchAll();
 
             <!-- Botão Voltar -->
             <div class="form-botoes">
-                <button onclick="window.location.href='dashboard.php'">Voltar</button>
+                <button onclick="window.location.replace('index.php')">Voltar</button>
             </div>
         </main>
         <?php include 'includes/footer.php'; ?>

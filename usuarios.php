@@ -111,7 +111,7 @@ $usuarios = $stmt->fetchAll();
                     </div>
 
                     <div class="form-botoes">
-                        <button onclick="window.location.href='dashboard.php'">Voltar</button>
+                        <button onclick="window.location.replace('index.php')">Voltar</button>
                     </div>
             </section>
         </main>

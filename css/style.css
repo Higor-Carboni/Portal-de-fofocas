@@ -1303,6 +1303,7 @@ body.dark-mode .btn-cadastrar-noticia {
     }
 }
 
+
 /* ===== Responsividade: tabela-noticias ===== */
 @media (max-width: 600px) {
   .tabela-noticias {
@@ -1446,3 +1447,4 @@ body.dark-mode .btn-cadastrar-noticia {
 /* ---- RESPONSIVO: mostra os cards, esconde tabela ---- */
 
 /* ==== [FIM DOS CARDS RESPONSIVOS DE SOLICITAÇÃO] ==== */
+

@@ -101,7 +101,24 @@ $exibeOffcanvas = isset($_SESSION['usuario_id']);
                     Nova Notícia</a></li>
               <?php endif; ?>
 
-              <li class="nav-item"><a class="nav-link text-danger" href="logout.php"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+              <li class="nav-item">
+                <a class="nav-link text-danger" href="logout.php"><i class="fas fa-sign-out-alt"></i> Sair</a>
+              </li>
+
+              <!-- ABA ACESSIBILIDADE COMO DROPDOWN -->
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-white" href="#" id="acessibilidadeDropdown" role="button"
+                   data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fa fa-universal-access"></i> Acessibilidade
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="acessibilidadeDropdown">
+                  <li>
+                    <button class="dropdown-item" id="toggle-darkmode-btn" type="button">
+                      <i class="fa fa-moon"></i> <span id="darkmode-status">Ativar Dark Mode</span>
+                    </button>
+                  </li>
+                </ul>
+              </li>
             <?php endif; ?>
           </ul>
         </div>
@@ -121,3 +138,40 @@ $exibeOffcanvas = isset($_SESSION['usuario_id']);
     <?php endif; ?>
   </div>
 </header>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    function atualizaBotaoDarkMode() {
+        const status = document.getElementById('darkmode-status');
+        const icon = document.querySelector('#toggle-darkmode-btn i');
+        if (!status || !icon) return;
+        if(document.body.classList.contains('dark-mode')) {
+            status.textContent = 'Desativar Dark Mode';
+            icon.className = 'fa fa-sun';
+        } else {
+            status.textContent = 'Ativar Dark Mode';
+            icon.className = 'fa fa-moon';
+        }
+    }
+
+    // Aplica dark mode se já estiver salvo
+    if(localStorage.getItem('darkmode')) {
+        document.body.classList.add('dark-mode');
+    }
+    atualizaBotaoDarkMode();
+
+    // Evento do botão
+    const btn = document.getElementById('toggle-darkmode-btn');
+    if (btn) {
+        btn.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            if(document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkmode', '1');
+            } else {
+                localStorage.removeItem('darkmode');
+            }
+            atualizaBotaoDarkMode();
+        });
+    }
+});
+</script>

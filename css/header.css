@@ -200,3 +200,31 @@
   }
 }
 
+body.dark-mode {
+  background: #181818 !important;
+  color: #f3f3f3 !important;
+}
+body.dark-mode .topo,
+body.dark-mode .offcanvas,
+body.dark-mode header,
+body.dark-mode .cabecalho-container {
+  background: #222 !important;
+  color: #eee !important;
+}
+body.dark-mode .nav-link,
+body.dark-mode .dropdown-menu,
+body.dark-mode .dropdown-item {
+  background: #222 !important;
+  color: #eee !important;
+}
+body.dark-mode .navbar-toggler,
+body.dark-mode .btn,
+body.dark-mode .btn-outline-secondary {
+  background: #333 !important;
+  color: #eee !important;
+  border-color: #555 !important;
+}
+body.dark-mode .offcanvas {
+  background-color: #222 !important;
+}
+

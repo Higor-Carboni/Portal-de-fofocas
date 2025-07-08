@@ -1,13 +1,11 @@
 /* --------------------- BASE --------------------- */
 html,
 body {
-  background: #f5f6fa;
   height: 100%;
-  max-width: 100%;
   margin: 0;
   padding: 0;
   font-family: "Segoe UI", Arial, sans-serif;
-  overflow-x: hidden;
+  background: #f4f6fa;
 }
 
 /* --------------------- ESTRUTURA GERAL --------------------- */
@@ -76,11 +74,10 @@ body {
   gap: 32px;
   justify-content: center;
   margin-top: 10px;
-  /* background: #f5f6fa; */
 }
 
 .card-noticia {
-  background: #f5f6fa;
+  background: #fff;
   border-radius: 18px;
   box-shadow: 0 6px 24px #0002;
   overflow: hidden;
@@ -203,7 +200,7 @@ form input[type="submit"]:hover {
 /* --------------------- FORM CADASTRAR NOTÍCIA --------------------- */
 .form-box-noticia {
   background: #fff;
-  max-width: 700px;
+  max-width: 720px;
   margin: 32px auto;
   padding: 28px;
   border-radius: 12px;
@@ -274,7 +271,7 @@ form input[type="submit"]:hover {
   text-align: center;
 }
 
-/* --------------------- RESPONSIVO: CARDS DE NOTÍCIAS --------------------- */
+/* --------------------- RESPONSIVO --------------------- */
 @media (max-width: 1100px) {
   .card-noticia {
     width: 46vw;
@@ -311,6 +308,35 @@ form input[type="submit"]:hover {
   .form-botoes {
     flex-direction: column;
   }
+}
+
+/* --------------------- ADMIN --------------------- */
+.admin-links {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 400px;
+  padding: 0 16px;
+}
+
+.admin-links a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #232b3f;
+  color: #fff;
+  padding: 14px;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.2s;
+  font-size: 1.05em;
+  justify-content: center;
+}
+
+.admin-links a:hover {
+  background: #3a4666;
 }
 
 .menu-links-container {
@@ -387,24 +413,15 @@ form input[type="submit"]:hover {
 
 /* === Estrutura principal do dashboard === */
 .conteudo-dashboard {
-  padding: 0 auto;
+  padding: 0;
   max-width: 1200px;
   margin: auto;
+  background: #f5f6fa;
   min-height: calc(100vw - 140px); /* Ajuste para header + footer */
   display: flex;
   flex-direction: column;
   gap: 24px;
   box-sizing: border-box;
-}
-
-/* Título do Portal */
-.titulo-portal {
-  color: #fff;
-  font-size: 1.8em;
-  font-weight: bold;
-  margin-left: 16px;
-  flex-grow: 1; /* Permite que o título ocupe o espaço restante */
-  text-align: center; /* Centraliza o título */
 }
 
 /* Título principal */
@@ -418,18 +435,6 @@ form input[type="submit"]:hover {
   align-items: center;
   justify-content: center;
   gap: 12px;
-}
-
-@media (max-width: 600px) {
-  .conteudo-dashboard,
-  .conteudo,
-  .conteudo-page {
-    padding: 0 2vw !important;
-    margin: 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box;
-  }
 }
 
 /* Botões de navegação rápida */
@@ -473,7 +478,7 @@ form input[type="submit"]:hover {
 
 .card-info-inline {
   flex: 1;
-  background: #f5f6fa;
+  background: #f5f7fb;
   padding: 12px 16px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -494,51 +499,45 @@ form input[type="submit"]:hover {
 }
 
 .area-graficos {
-  width: 100%;
-  min-height: calc(100vh - 140px); 
+  background: #f5f6fa; /* ou a cor de fundo que preferir */
+  width: 100vw;
+  min-height: calc(100vh - 140px); /* ajuste 140px p/ header+footer */
   padding: 40px 0;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centraliza todo o conteúdo dentro da área */
 }
 
 .graficos-dashboard {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  justify-content: center;  /* Centraliza horizontalmente */
+  align-items: center;
   width: 100%;
-  padding: 0;
-  box-sizing: border-box;
-  /* background: #f5f6fa; */
 }
 
 .grafico-box {
-  background: #f8fafc;           /* Cinza quase branco, mais clean */
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 4px 24px #232b3f14; /* Sombra mais suave e elegante */
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   width: 100%;
-  max-width: 700px;
-  min-width: 260px;
+  max-width: 650px; /* aumenta a largura máxima dos gráficos */
+  min-width: 260px; /* garante que não fique muito estreito */
   margin: 0 auto;
   box-sizing: border-box;
-  border: 1px solid #e3e8ee;     /* Borda sutil */
 }
 
 .grafico-box h3 {
-  color: #23395d;                /* Azul escuro elegante */
-  margin-bottom: 14px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  color: #232b3f;
+  margin-bottom: 12px;
 }
 
 .grafico-box canvas {
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px #23395d0a;
-  padding: 8px;
+  width: 100% !important;
+  height: 240px !important; /* Ajuste aqui se quiser mais alto/baixo */
+  max-width: 100%;
+  display: block;
 }
 
 @media (max-width: 800px) {
@@ -551,58 +550,18 @@ form input[type="submit"]:hover {
   }
 }
 
-@media (max-width: 600px) {
-  .grafico-box,
-  .form-box-noticia,
-  form,
-  .card-noticia,
-  .cards-info-inline,
-  .tabela-noticias {
-    margin-left: 2vw !important;
-    margin-right: 2vw !important;
-    width: auto !important;
-    max-width: 96vw !important;
-    box-sizing: border-box;
-  }
-}
-
 /* Tabela de notícias pessoais */
 #suas-noticias-container {
   margin-top: 24px;
+  
 }
 
 .tabela-noticias {
-  display: table;
-  width: 95%;
-  max-width: 95vw;
-  overflow-x: auto;
-  border-radius: 12px;
+  width: 100%;
   border-collapse: collapse;
-  background: #f5f6fa;
-  box-shadow: 0 2px 12px #0001;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   margin: 0 auto;
-}
-
-/* Linhas alternadas para destacar cada leitor */
-.tabela-noticias tr {
-  background: #f5f6fa;
-  transition: background 0.2s;
-}
-
-/* Opcional: destaque ao passar o mouse */
-.tabela-noticias tr:hover {
-  background: #e9ebf1;
-}
-
-.tabela-noticias td:nth-child(2),
-.tabela-noticias th:nth-child(2) {
-  max-width: 400px; /* Ajuste aqui o tamanho ideal */
-  width: 400px;
-  min-width: 180px;
-  white-space: normal; /* quebra de linha */
-  overflow: visible;
-  text-overflow: unset; /* coloca "..." se passar do limite */
-  text-align: left;
 }
 
 .tabela-noticias th,
@@ -613,7 +572,7 @@ form input[type="submit"]:hover {
 }
 
 .tabela-noticias th {
-  background: #f5f6fa;
+  background: #f0f0f0;
   color: #232b3f;
 }
 
@@ -681,7 +640,7 @@ Botão voltar .btn-voltar {
   width: 48px;
   height: 48px;
   font-size: 22px;
-  display: block;
+  display: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   cursor: pointer;
 }
@@ -689,7 +648,6 @@ Botão voltar .btn-voltar {
 .btn-cadastrar-noticia {
   display: inline-flex;
   align-items: center;
-  margin-right: 16px;
   gap: 8px;
   background: #b51717;
   color: #fff;
@@ -1302,147 +1260,3 @@ body.dark-mode .btn-cadastrar-noticia {
         margin-bottom: 15px;
     }
 }
-
-/* ===== Responsividade: tabela-noticias ===== */
-@media (max-width: 600px) {
-  .tabela-noticias {
-    width: 100vw !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    box-sizing: border-box;
-    display: block;
-    overflow-x: auto;
-  }
-  .tabela-noticias thead,
-  .tabela-noticias tbody,
-  .tabela-noticias th,
-  .tabela-noticias td,
-  .tabela-noticias tr {
-    display: block;
-    width: 100%;
-    min-width: unset;
-    box-sizing: border-box;
-  }
-  .tabela-noticias thead tr {
-    display: none;
-  }
-  .tabela-noticias tr {
-    margin-bottom: 10px;
-    border-bottom: 1px solid #ddd;
-    background: #fff;
-  }
-  .tabela-noticias td {
-    text-align: left;
-    padding-left: 18vw;
-    padding-right: 3vw;
-    position: relative;
-    border: none;
-    border-bottom: 1px solid #eee;
-    min-height: 36px;
-    white-space: normal;
-    font-size: 1em;
-    word-break: break-word;
-  }
-  .tabela-noticias td::before {
-    content: attr(data-label);
-    position: absolute;
-    left: 8px;
-    top: 10px;
-    width: 16vw;
-    min-width: 60px;
-    font-weight: bold;
-    color: #555;
-    font-size: 0.98em;
-    white-space: pre-wrap;
-  }
-  .tabela-noticias th,
-  .tabela-noticias td {
-    padding: 6px 4px;
-    word-break: break-word;
-    font-size: 0.97em;
-    text-align: left;
-  }
-  /* Destaca a linha do nome do usuário (primeira linha de cada bloco) */
-.tabela-noticias tr.nome-usuario,
-.tabela-noticias tr td:first-child {
-  background: #e0e3ec; /* tom mais forte, ajuste se quiser */
-  font-weight: bold;
-  color: #232b3f;
-  }
-  .tabela-noticias td:nth-child(2),
-  .tabela-noticias th:nth-child(2) {
-    max-width: 120px;
-    width: 120px;
-  }
-}
-
-/* ==== [SOLICITAÇÕES] CARDS RESPONSIVOS PARA MOBILE ==== */
-
-/* --- Corrige o card responsivo para não estourar as laterais --- */
-.cards-lista-solicitacao {
-  display: none; /* Esconde por padrão */
-  width: 100%;
-  max-width: 430px;
-  margin: 0 auto 18px auto;
-  padding-left: 4px;
-  padding-right: 4px;
-  box-sizing: border-box;
-}
-
-/* Estilo individual de cada card de solicitação */
-.card-solicitacao {
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px #0001;
-  padding: 14px 8px 12px 10px;
-  margin: 22px 0;
-  border-left: 6px solid #3a4666;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.card-solicitacao strong {
-  color: #232b3f;
-  font-weight: 600;
-  min-width: 88px;
-  display: inline-block;
-}
-
-.card-solicitacao .card-acoes {
-  margin-top: 7px;
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-
-.card-solicitacao em {
-  color: #777;
-  font-style: italic;
-}
-
-/* --- Botões dentro do card (reutiliza suas cores) --- */
-.card-solicitacao .btn-editar,
-.card-solicitacao .btn-excluir {
-  padding: 6px 14px;
-  font-size: 0.97em;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  color: #fff;
-  text-decoration: none;
-  background: #3a4666;
-  margin-right: 7px;
-  margin-bottom: 5px;
-  transition: background 0.2s;
-}
-.card-solicitacao .btn-editar:hover {
-  background: #2979cc;
-}
-.card-solicitacao .btn-excluir:hover {
-  background: #cc2e2e;
-}
-
-/* ---- RESPONSIVO: mostra os cards, esconde tabela ---- */
-
-/* ==== [FIM DOS CARDS RESPONSIVOS DE SOLICITAÇÃO] ==== */

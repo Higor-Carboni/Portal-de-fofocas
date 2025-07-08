@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <div class="form-botoes">
                         <button type="submit">Salvar</button>
-                        <button type="button" onclick="window.location.href='usuarios.php'">Voltar</button>
+                        <button type="button" onclick="window.location.replace('index.php')">Voltar</button>
                     </div>
                 </form>
             </div>

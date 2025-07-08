@@ -3,6 +3,17 @@ html,
 body {
   background: #f5f6fa;
 }
+/* Corrige comportamento de dropdown dentro do offcanvas */
+.offcanvas .dropdown-menu {
+  position: static;
+  float: none;
+  display: none;
+  margin-top: 0.5rem;
+}
+
+.offcanvas .dropdown-menu.show {
+  display: block;
+}
 
 .dropdown {
   position: relative;

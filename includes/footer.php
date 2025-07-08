@@ -28,7 +28,9 @@
   // Exibir botão de topo ao rolar a página
   window.addEventListener('scroll', function () {
     const btn = document.getElementById('btn-topo');
-    btn.style.display = window.scrollY > 10 ? 'block' : 'none';
+    if (btn) {
+      btn.style.display = window.scrollY > 10 ? 'block' : 'none';
+    }
   });
 </script>
 

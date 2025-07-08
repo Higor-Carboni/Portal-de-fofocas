@@ -30,8 +30,6 @@ CREATE TABLE IF NOT EXISTS noticias (
     FOREIGN KEY (categoria_id) REFERENCES categorias(id)
 );
 
-<<<<<<< HEAD
-=======
 -- Tabela de Anúncios
 CREATE TABLE IF NOT EXISTS anuncios (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -45,20 +43,9 @@ CREATE TABLE IF NOT EXISTS anuncios (
     valorAnuncio DECIMAL(10,2) DEFAULT 0.00 COMMENT 'Valor cobrado pelo anuncio'
 );
 
->>>>>>> 48d91551a678180f543f3f052637b9ac54d55360
 -- Inserir categorias padrão
 INSERT INTO categorias (nome) VALUES 
 ('Famosos'),
 ('TV'),
 ('Política'),
-<<<<<<< HEAD
 ('Curiosidades');
-=======
-('Curiosidades');
-
--- Inserir alguns anúncios de exemplo
-INSERT INTO anuncios (nome, imagem, link, texto, ativo, destaque, valorAnuncio) VALUES
-('Empresa ABC', 'img/anuncio1.jpg', 'https://www.empresaabc.com', 'Os melhores produtos para você!', TRUE, TRUE, 150.00),
-('Loja XYZ', 'img/anuncio2.jpg', 'https://www.lojaxyz.com', 'Promoções imperdíveis!', TRUE, FALSE, 100.00),
-('Restaurante Delícias', 'img/anuncio3.jpg', 'https://www.restaurantedelicias.com', 'A melhor comida da cidade!', TRUE, TRUE, 200.00);
->>>>>>> 48d91551a678180f543f3f052637b9ac54d55360

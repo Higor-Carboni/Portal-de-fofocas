@@ -50,6 +50,61 @@ $msg = $_GET['msg'] ?? '';
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .btn-acoes {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            gap: 8px !important;
+            min-width: 180px !important;
+            min-height: 44px !important;
+            height: 44px !important;
+        }
+        .btn-acoes a {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 40px !important;
+            height: 40px !important;
+            border-radius: 6px !important;
+            background: #f1f1f1 !important;
+            transition: background 0.2s !important;
+            font-size: 20px !important;
+            color: #333 !important;
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .btn-acoes a:hover {
+            background: #e0e0e0 !important;
+            color: #007bff !important;
+        }
+        .btn-acoes i {
+            margin: 0 !important;
+            padding: 0 !important;
+            line-height: 1 !important;
+            font-size: 20px !important;
+        }
+        .usuarios td, .usuarios th {
+            vertical-align: middle !important;
+            text-align: center !important;
+            padding-top: 8px !important;
+            padding-bottom: 8px !important;
+            height: 60px !important;
+            min-width: 60px !important;
+        }
+        .btn-editar, .btn-excluir, .btn-toggle, .btn-ativar, .btn-desativar, .btn-add-destaque, .btn-remove-destaque {
+            width: 40px !important;
+            height: 40px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            border-radius: 6px !important;
+            font-size: 20px !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -157,7 +212,7 @@ $msg = $_GET['msg'] ?? '';
                     </div>
 
                     <div class="form-botoes">
-                        <button onclick="window.location.href='dashboard.php'">Voltar</button>
+                        <button onclick="window.location.replace('index.php')">Voltar</button>
                     </div>
                 </div>
             </section>

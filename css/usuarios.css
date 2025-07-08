@@ -32,19 +32,19 @@ table.usuarios th {
   color: white;
 }
 
-.btn-acoes a {
+/* .btn-acoes a {
   margin-right: 6px;
   text-decoration: none;
   padding: 6px 10px;
   border-radius: 4px;
   color: white;
   font-size: 0.9em;
-}
+} */
 
-.btn-editar { background: #3498db; }
+/* .btn-editar { background: #3498db; }
 .btn-excluir { background: #e74c3c; }
 .btn-promover { background: #27ae60; }
-.btn-rebaixar { background: #f39c12; }
+.btn-rebaixar { background: #f39c12; } */
 
 .form-botoes {
   display: flex;
@@ -65,13 +65,13 @@ table.usuarios th {
   background: #3a4666;
 }
 
-.acoes-usuarios {
+/* .acoes-usuarios {
   display: flex;
   justify-content: flex-end;
   max-width: 1000px;
   width: 95%;
   margin: 12px auto 0 auto;
-}
+} */
 
 
 .btn-cadastrar-usuario {
@@ -122,12 +122,12 @@ table.usuarios th {
     color: #333;
   }
 
-  .btn-acoes {
+  /* .btn-acoes {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
     justify-content: flex-start;
-  }
+  } */
 }
 
 /* Estilos para Anúncios */
@@ -159,7 +159,7 @@ table.usuarios th {
     color: #383d41;
 }
 
-.btn-toggle {
+/* .btn-toggle {
     display: inline-block;
     padding: 8px 12px;
     margin: 0 5px;
@@ -168,44 +168,44 @@ table.usuarios th {
     color: white;
     font-size: 0.9em;
     transition: all 0.3s ease;
-}
+} */
 
-.btn-ativar {
+/* .btn-ativar {
     background: #28a745;
-}
+} */
 
-.btn-ativar:hover {
+/* .btn-ativar:hover {
     background: #218838;
     transform: scale(1.05);
-}
+} */
 
-.btn-desativar {
+/* .btn-desativar {
     background: #ffc107;
     color: #212529;
-}
+} */
 
-.btn-desativar:hover {
+/* .btn-desativar:hover {
     background: #e0a800;
     transform: scale(1.05);
-}
+} */
 
-.btn-add-destaque {
+/* .btn-add-destaque {
     background: #17a2b8;
-}
+} */
 
-.btn-add-destaque:hover {
+/* .btn-add-destaque:hover {
     background: #138496;
     transform: scale(1.05);
-}
+} */
 
-.btn-remove-destaque {
+/* .btn-remove-destaque {
     background: #6c757d;
-}
+} */
 
-.btn-remove-destaque:hover {
+/* .btn-remove-destaque:hover {
     background: #5a6268;
     transform: scale(1.05);
-}
+} */
 
 .checkbox-group {
     margin: 20px 0;

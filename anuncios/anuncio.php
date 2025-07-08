@@ -70,14 +70,51 @@ $anunciantes = $pdo->query("SELECT * FROM anuncio ORDER BY data_cadastro DESC")-
             background-color: #5a6268;
         }
 
+        .btn-acoes {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            gap: 8px !important;
+            min-width: 180px !important; /* Garante largura mínima para todos os botões */
+            min-height: 44px !important;
+            height: 44px !important;
+        }
+
         .btn-acoes a {
-            margin: 0 6px;
-            font-size: 16px;
-            color: #333;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 40px !important;
+            height: 40px !important;
+            border-radius: 6px !important;
+            background: #f1f1f1 !important;
+            transition: background 0.2s !important;
+            font-size: 20px !important;
+            color: #333 !important;
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
         }
 
         .btn-acoes a:hover {
-            color: #007bff;
+            background: #e0e0e0 !important;
+            color: #007bff !important;
+        }
+
+        .btn-acoes i {
+            margin: 0 !important;
+            padding: 0 !important;
+            line-height: 1 !important;
+            font-size: 20px !important;
+        }
+
+        .table td, .table th {
+            vertical-align: middle !important;
+            text-align: center !important;
+            padding-top: 8px !important;
+            padding-bottom: 8px !important;
+            height: 60px !important;
+            min-width: 60px !important;
         }
     </style>
 </head>
@@ -144,21 +181,21 @@ $anunciantes = $pdo->query("SELECT * FROM anuncio ORDER BY data_cadastro DESC")-
                         <td>
                             <div class="btn-acoes">
                                 <a href="editar_anuncio.php?id=<?= $a['id'] ?>" title="Editar">
-                                    <i class="fas fa-pen"></i>
+                                    <i class="fas fa-pen fa-lg"></i>
                                 </a>
                                 <a href="excluir_anuncio.php?id=<?= $a['id'] ?>" onclick="return confirm('Excluir este anúncio?')" title="Excluir">
-                                    <i class="fas fa-trash"></i>
+                                    <i class="fas fa-trash fa-lg"></i>
                                 </a>
                             </div>
                         </td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
-            </table>
+            </table>    
         </div>
 
         <div class="form-botoes">
-            <button onclick="window.location.href='../dashboard.php'">Voltar</button>
+            <button onclick="window.location.replace('../index.php')">Voltar</button>
         </div>
     </main>
 

@@ -111,127 +111,13 @@ $usuarios = $stmt->fetchAll();
                     </div>
 
                     <div class="form-botoes">
-                        <button onclick="window.location.href='dashboard.php'">Voltar</button>
+                        <button onclick="window.location.replace('index.php')">Voltar</button>
                     </div>
             </section>
         </main>
 
         <?php include 'includes/footer.php'; ?>
     </div>
-
-    <script>
-        document.getElementById('btnExportPdf')?.addEventListener('click', function () {
-            var tabela = document.querySelector('.usuarios');
-            if (!tabela) return;
-
-            // CAPTURA OS DADOS DA TABELA
-            var headers = [];
-            tabela.querySelectorAll('thead th').forEach(th => headers.push(th.innerText));
-            var data = [];
-            tabela.querySelectorAll('tbody tr').forEach(tr => {
-                var row = [];
-                tr.querySelectorAll('td').forEach(td => row.push(td.innerText));
-                if (row.length) data.push(row);
-            });
-
-            const { jsPDF } = window.jspdf;
-            var doc = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'a4' });
-
-            const pageWidth = doc.internal.pageSize.getWidth();
-            const pageHeight = doc.internal.pageSize.getHeight();
-            const headerHeight = 90;
-            const footerHeight = 35;
-
-            // Centralizar logo + título (calcula largura total)
-            const logoW = 48;
-            const logoH = 48;
-            const title = "Portal de Notícias";
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(26);
-            const textWidth = doc.getTextWidth(title);
-            const space = 18;
-            const totalWidth = logoW + space + textWidth;
-            const groupX = (pageWidth - totalWidth) / 2;
-            const groupY = 46;
-
-            function drawHeader() {
-                doc.setFillColor("#f5f6fa");
-                doc.rect(0, 0, pageWidth, headerHeight, 'F');
-                doc.addImage('img/logoFofoca500.png', 'PNG', 38, groupY - logoH / 2, logoW, logoH);
-                doc.setFont('helvetica', 'bold');
-                doc.setFontSize(26);
-                doc.setTextColor("#232b3f");
-                doc.text(title, pageWidth / 2, groupY + 8, { align: "center" });
-            }
-
-            function drawFooter() {
-                doc.setFillColor("#f5f6fa");
-                doc.rect(0, pageHeight - footerHeight, pageWidth, footerHeight, 'F');
-                doc.setFont('helvetica', 'normal');
-                doc.setFontSize(12);
-                doc.setTextColor("#232b3f");
-                doc.text(
-                    '© ' + new Date().getFullYear() + ' Fofoquei News. Todos os direitos reservados.',
-                    pageWidth / 2,
-                    pageHeight - 15,
-                    { align: "center" }
-                );
-            }
-
-            // HEADER/FOOTER PRIMEIRA PÁGINA
-            drawHeader();
-
-            // Título do relatório (logo abaixo do header)
-            doc.setFont('helvetica', 'normal');
-            doc.setFontSize(16);
-            doc.setTextColor("#3a4666");
-            const titleY = headerHeight + 28;
-            doc.text("Relatório de Usuários Cadastrados", pageWidth / 2, titleY, { align: "center" });
-
-            // GERA TABELA
-            doc.autoTable({
-                head: [headers],
-                body: data,
-                startY: titleY + 12,
-                margin: { left: 30, right: 30 },
-                styles: {
-                    font: 'helvetica',
-                    fontSize: 10,
-                    textColor: "#232b3f",
-                    fillColor: "#fff",
-                    lineWidth: 0.3,
-                    lineColor: "#cfd8dc",
-                    halign: 'left'
-                },
-                headStyles: {
-                    fillColor: "#23304a",
-                    textColor: "#fff",
-                    fontStyle: 'bold',
-                    halign: 'center',
-                    lineWidth: 0.8,
-                    lineColor: "#23304a"
-                },
-                alternateRowStyles: {
-                    fillColor: "#f5f6fa"
-                },
-                tableLineColor: "#b0bec5",
-                tableLineWidth: 0.6,
-                didDrawPage: function (data) {
-                    drawHeader();
-                    doc.setFont('helvetica', 'normal');
-                    doc.setFontSize(16);
-                    doc.setTextColor("#3a4666");
-                    doc.text("Relatório de Usuários Cadastrados", pageWidth / 2, headerHeight + 28, { align: "center" });
-                    drawFooter();
-                }
-            });
-
-            drawFooter();
-
-            doc.save('relatorio-usuarios.pdf');
-        });
-    </script>
-
 </body>
 
 </html>

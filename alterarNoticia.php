@@ -123,7 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="form-botoes">
                 <button type="submit">Salvar Alterações</button>
-                <button type="button" onclick="window.location.href='dashboard.php'">Voltar</button>
+                <button type="button" onclick="window.location.replace('index.php')">Voltar</button>
             </div>
         </form>
     </main>

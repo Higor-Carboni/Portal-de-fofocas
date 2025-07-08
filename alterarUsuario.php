@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="email" name="email" id="email" value="<?= htmlspecialchars($usuario['email']) ?>" required>
             <div class="form-botoes">
                 <button type="submit">Salvar</button>
-                <button type="button" onclick="window.location.href='dashboard.php'">Voltar</button>
+                <button type="button" onclick="window.location.replace('index.php')">Voltar</button>
             </div>
         </form>
             </div>

@@ -1,7 +1,7 @@
 <?php
+session_start();
 require_once 'conexao.php';
 require_once 'funcoes.php';
-session_start();
 
 // Ativar modo de erro para debugging
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -278,5 +278,35 @@ window.onclick = function(event) {
     if (event.target === modal) modal.classList.remove('show');
 }
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const dropdownToggles = document.querySelectorAll('.offcanvas .dropdown-toggle');
+
+  dropdownToggles.forEach(function (toggle) {
+    toggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      const parent = toggle.closest('.nav-item');
+      const menu = parent.querySelector('.dropdown-menu');
+
+      if (menu.classList.contains('show')) {
+        menu.classList.remove('show');
+      } else {
+        // Fecha todos os outros dropdowns
+        document.querySelectorAll('.offcanvas .dropdown-menu.show').forEach(m => m.classList.remove('show'));
+        menu.classList.add('show');
+      }
+    });
+  });
+
+  // Fecha os dropdowns quando o offcanvas é fechado
+  const offcanvas = document.getElementById('menuLateral');
+  if (offcanvas) {
+    offcanvas.addEventListener('hidden.bs.offcanvas', function () {
+      document.querySelectorAll('.offcanvas .dropdown-menu.show').forEach(m => m.classList.remove('show'));
+    });
+  }
+});
+</script>
+
 </body>
 </html>

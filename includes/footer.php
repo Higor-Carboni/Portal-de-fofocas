@@ -20,7 +20,7 @@
 </footer>
 
 <!-- Botão de voltar ao topo -->
-<button id="btn-topo" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
+<button id="btn-topo" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });" style="display:none;position:fixed;right:24px;bottom:24px;z-index:99;font-size:1.3em;background:#232b3f;color:#fff;border:none;border-radius:50%;width:44px;height:44px;align-items:center;justify-content:center;box-shadow:0 2px 8px #0003;">
   <i class="fas fa-arrow-up"></i>
 </button>
 
@@ -29,7 +29,7 @@
   window.addEventListener('scroll', function () {
     const btn = document.getElementById('btn-topo');
     if (btn) {
-      btn.style.display = window.scrollY > 10 ? 'block' : 'none';
+      btn.style.display = window.scrollY > 300 ? 'block' : 'none';
     }
   });
 </script>

@@ -8,8 +8,11 @@ $anunciantes = $pdo->query("SELECT * FROM anuncio ORDER BY data_cadastro DESC")-
 <head>
     <meta charset="UTF-8">
     <title>Anunciantes</title>
-    <!-- CSS carregado no header específico -->
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .btn-cadastrar-noticia {
             background-color: #4CAF50;
@@ -120,7 +123,7 @@ $anunciantes = $pdo->query("SELECT * FROM anuncio ORDER BY data_cadastro DESC")-
 </head>
 <body>
 <div class="conteudo-page">
-    <?php include 'header_anuncios.php'; ?>
+    <?php include '../includes/header.php'; ?>
 
     <main class="conteudo container-fluid">
         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -199,7 +202,7 @@ $anunciantes = $pdo->query("SELECT * FROM anuncio ORDER BY data_cadastro DESC")-
         </div>
     </main>
 
-    <?php include 'footer_anuncios.php'; ?>
+    <?php include '../includes/footer.php'; ?>
 </div>
 
 <!-- Scripts carregados no footer específico -->

@@ -1,20 +1,27 @@
 footer {
-  background: #232b3f;
+  background: linear-gradient(180deg, #232b3f 90%, #181a1b 100%);
   color: #fff;
   text-align: center;
-  padding: 18px 0 8px 0;
-  margin-top: 40px;
+  padding: 22px 0 10px 0;
+  margin: 0;
+  border-radius: 6px;
+  width: 100%;
+  max-width: 100vw;
+  box-shadow: 0 -4px 24px #0003;
   flex-shrink: 0;
 }
 
 footer .redes {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
   margin-bottom: 8px;
 }
 
 footer .redes a {
   color: #ffffffcc;
   margin: 0 8px;
-  font-size: 1.3em;
+  font-size: 1.5em;
   transition: color 0.15s;
 }
 
@@ -45,4 +52,11 @@ footer .redes a:hover {
 #btn-topo:hover {
   background: #3a4666;
   transform: scale(1.08);
+}
+
+@media (max-width: 600px) {
+  footer {
+    border-radius: 0 0 10px 10px;
+    padding: 14px 0 6px 0;
+  }
 }

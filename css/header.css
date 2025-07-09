@@ -174,9 +174,11 @@
 /* --- RESPONSIVIDADE --- */
 @media (max-width: 600px) {
   .topo {
-    height: auto;
-    min-height: 44px;
-    padding: 0 4px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 1000;
   }
   .cabecalho-container {
     padding: 0 4px;
@@ -228,7 +230,8 @@ body.dark-mode .btn-outline-secondary {
 }
 body.dark-mode .offcanvas {
   background-color: #222 !important;
-=======
+}
+
 /* Botão Dark Mode para Visitantes */
 .btn-darkmode-visitante {
   background: none;
@@ -262,6 +265,5 @@ body.dark-mode .offcanvas {
     font-size: 1rem;
     padding: 6px 10px;
   }
-}
 }
 

@@ -154,17 +154,34 @@ $exibeOffcanvas = isset($_SESSION['usuario_id']);
 
 <script>
   // Aplica dark mode se o usuário já tinha escolhido antes
-  if(localStorage.getItem('dark-mode') === 'true') {
+  if(localStorage.getItem('darkmode') === '1') {
     document.body.classList.add('dark-mode');
   }
 
   document.addEventListener('DOMContentLoaded', function() {
     const btn = document.getElementById('toggle-dark-mode');
-    if (!btn) return;
-    btn.addEventListener('click', function() {
-      document.body.classList.toggle('dark-mode');
-      localStorage.setItem('dark-mode', document.body.classList.contains('dark-mode'));
-    });
+    if (btn) {
+      btn.addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
+        if(document.body.classList.contains('dark-mode')) {
+          localStorage.setItem('darkmode', '1');
+        } else {
+          localStorage.removeItem('darkmode');
+        }
+      });
+    }
+    // Botão visitante
+    const btnVisitante = document.getElementById('toggle-darkmode-btn-visitante');
+    if (btnVisitante) {
+      btnVisitante.addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
+        if(document.body.classList.contains('dark-mode')) {
+          localStorage.setItem('darkmode', '1');
+        } else {
+          localStorage.removeItem('darkmode');
+        }
+      });
+    }
   });
 </script>
 

@@ -130,9 +130,9 @@ $exibeOffcanvas = isset($_SESSION['usuario_id']);
         <?php endif; ?>
 
         <!-- Darkmode para visitantes -->
-        <button class="btn-darkmode-visitante" id="toggle-darkmode-btn-visitante" type="button" title="Alternar Dark Mode">
+        <!-- <button class="btn-darkmode-visitante" id="toggle-darkmode-btn-visitante" type="button" title="Alternar Dark Mode">
           <i class="fa fa-moon"></i>
-        </button>
+        </button> -->
       </nav>
     <?php endif; ?>
   </div>

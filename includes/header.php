@@ -115,20 +115,6 @@ $exibeOffcanvas = isset($_SESSION['usuario_id']);
 
             <?php endif; ?>
 
-            <!-- Acessibilidade -->
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle text-white" href="#" id="acessibilidadeDropdown" role="button"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa fa-universal-access"></i> Acessibilidade
-              </a>
-              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="acessibilidadeDropdown">
-                <li>
-                  <button class="dropdown-item" id="toggle-darkmode-btn" type="button">
-                    <i class="fa fa-moon"></i> <span id="darkmode-status">Ativar Dark Mode</span>
-                  </button>
-                </li>
-              </ul>
-            </li>
           </ul>
         </div>
       </div>

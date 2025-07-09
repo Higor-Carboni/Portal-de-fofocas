@@ -29,6 +29,7 @@
 /* Para telas menores que 600px (celular) */
 @media (max-width: 600px) {
     .titulo-portal {
+      color: #fff;
         font-size: 1.4em;
         text-align: center;
         margin: 0 auto;

@@ -417,11 +417,11 @@ form input[type="submit"]:hover {
 
 /* === Estrutura principal do dashboard === */
 .conteudo-dashboard {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0 auto;
   padding: 0;
-  max-width: 1200px;
-  margin: auto;
-  background: #f5f6fa;
-  min-height: calc(100vw - 140px); /* Ajuste para header + footer */
+  background: transparent !important;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -489,6 +489,10 @@ form input[type="submit"]:hover {
   text-align: center;
 }
 
+h1.titulo-portal {
+  color: #fff;
+}
+
 .card-info-inline h3 {
   font-size: 1rem;
   color: #232b3f;
@@ -503,12 +507,11 @@ form input[type="submit"]:hover {
 }
 
 .area-graficos {
-  background: #f5f6fa; /* ou a cor de fundo que preferir */
-  width: 100vw;
-  min-height: calc(100vh - 140px); /* ajuste 140px p/ header+footer */
+  background: #f5f6fa;
+  width: 100%;
+  min-height: calc(100vh - 140px);
   padding: 40px 0;
-  margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%);
+  margin: 0;
   box-sizing: border-box;
 }
 
